@@ -5,11 +5,18 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  /* The use case of this font was "display heading, title, name ,logo, numbers" */
+  --font-cinzel: var(--font-cinzel), serif;
+
+  /* The use case of this font was "body, lore-paragraphs, hero-section, descriptions, bios,
+ navigations, input items, characters title" */
+  --font-crimson: var(--font-crimson), serif;
+
+  /* The use case of this font was "technical, labels, tags, badges, metadata,
+   timeline tags or name" */
+
+  --font-mono: var(--font-mono), monospace;
 }
 
 @media (prefers-color-scheme: dark) {
