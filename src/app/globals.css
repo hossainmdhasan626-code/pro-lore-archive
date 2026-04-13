@@ -6,6 +6,8 @@
 }
 
 @theme {
+  /* --- Font --- */
+
   /* The use case of this font was "display heading, title, name ,logo, numbers" */
   --font-cinzel: var(--font-cinzel), serif;
 
@@ -17,6 +19,70 @@
    timeline tags or name" */
 
   --font-mono: var(--font-mono), monospace;
+
+  /* --- BACKGROUNDS --- */
+
+  /* The use case of this color was: The primary background for the entire application. It acts as the deepest layer, providing a dark, 
+  immersive atmosphere for the lore content. */
+  --color-main-app-bg: #0c0a08;
+
+  /* The use case of this color was: Used for sidebar, content cards, and modals. It creates a subtle contrast against the main 
+  background to define separate sections. */
+  --color-card-sidebar-bg: #13110e;
+
+  /* The use case of this color was: Specifically for input fields, buttons, and elements in a hovered state. It indicates 
+  interactivity and depth. */
+  --color-interactive-hover-bg: #1c1814;
+
+  /* --- TYPOGRAPHY --- */
+
+  /* The use case of this color was: For major headings (H1, H2), character names on detail pages, and the primary logo text. 
+  It provides maximum readability and focus. */
+  --color-text-heading-primary: #e8e0d0;
+
+  /* The use case of this color was: For all body text, lore descriptions, and navigation links. Optimized for long-form reading 
+  when paired with Crimson Pro. */
+  --color-text-body-secondary: #a89880;
+
+  /* The use case of this color was: For small metadata like "Yr 312", character counts, or sidebar route hints. It keeps technical 
+  info subtle. */
+  --color-text-metadata-muted: #6a5c48;
+
+  /* --- ACCENTS & BORDERS --- */
+
+  /* The use case of this color was: The primary brand color. Used for the logo icon, active navigation borders, and primary action buttons. */
+  --color-gold-accent-primary: #c9a84c;
+
+  /* The use case of this color was: An illuminated version of gold for hover states. Used when a user interacts with a gold-bordered card or button. */
+  --color-gold-accent-hover: #e8c96a;
+
+  /* The use case of this color was: For very subtle borders and decorative lines that shouldn't distract from the content. It blends with the dark background. */
+  --color-gold-border-dim: #2a2418;
+
+  /* --- STATUS & CATEGORY (DYNAMICS) --- */
+
+  /* The use case of this color was: Used for error messages, delete buttons, and dangerous actions like "Delete World". */
+  --color-status-danger-red: #8b2a2a;
+
+  /* The use case of this color was: The hover state for danger-related buttons. It makes the red glow brighter when the user is about to click. */
+  --color-status-danger-hover: #c44040;
+
+  /* The use case of this color was: Specifically designated for the "Places" category. Used in place tags, city labels, and environment-related UI. */
+  --color-category-places-teal: #2a6b6b;
+
+  /* The use case of this color was: The hover or active state for any "Places" related UI element or tag. */
+  --color-category-places-hover: #40a8a8;
+
+  /* The use case of this color was: Specifically for the "Characters" category. Used in character type tags, relationship badges, and magical lore. */
+  --color-category-char-purple: #4a2a6b;
+
+  /* The use case of this color was: The hover or highlight state for character badges and magical element descriptions. */
+  --color-category-char-hover: #8a5abf;
+
+  /* --- NAVIGATION --- */
+
+  /* The use case of this color was: Dedicated for the navigation item hover border. It creates a sharp, visible line when hovering over sidebar links. */
+  --color-nav-hover-border: #c9a84c;
 }
 
 @media (prefers-color-scheme: dark) {
