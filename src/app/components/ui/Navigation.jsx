@@ -32,7 +32,7 @@ const Navigation = () => {
               className="
           group flex items-center justify-between
           px-5 py-3 
-          font-crimson text-text-body-secondary hover:text-text-heading-primary
+          font-crimson tracking-[0.12em] text-text-body-secondary hover:text-text-heading-primary
           hover:bg-interactive-hover-bg
           border border-transparent rounded-sm hover:border-nav-hover-border
           transition-all duration-300 ease-in-out

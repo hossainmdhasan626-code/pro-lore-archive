@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
           </div>
 
           {/* A div rapper for take the % of width for maiin containt */}
-          <div className="w-[70%]">
+          <div className="w-[87%]">
             {/* The main containt */}
             {children}
           </div>

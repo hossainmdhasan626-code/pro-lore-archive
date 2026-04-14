@@ -1,10 +1,10 @@
+import Overview from "./components/shared/Overview";
 
 export default function Home() {
   return (
    <div>
-    <p className="text-6xl front-green-600">
-      hasna
-    </p>
+    {/* Overviwe page */}
+    <Overview/>
    </div>
   )
 }
