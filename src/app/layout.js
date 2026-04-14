@@ -32,11 +32,11 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${cinzel.variable} ${crimson.variable} ${mono.variable} h-full antialiased`}
     >
-      <body>
+      <body className="bg-main-app-bg">
         {/* Create a div rapper for sidebar and main containt */}
         <div className="flex min-h-screen w-full">
           {/* A div rapper for take the % of width for sidebar */}
-          <div className="w-[30%]">
+          <div className="w-[13%] bg-card-sidebar-bg">
             {/* The sidebar component */}
             <Sidebar />
           </div>
