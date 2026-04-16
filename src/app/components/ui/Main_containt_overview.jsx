@@ -1,11 +1,17 @@
 import React from "react";
 
 const Main_containt_overview = async () => {
-  // fetch data form custom api
-  const res = await fetch("http://localhost:3000/api/worlds", {
-    next: { revalidate: 3600 },
+
+  // Get the base url form .env.local
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+
+  // fetch() data form custom api 
+  const res = await fetch(`${baseUrl}/api/worlds`, { 
+    cache: 'no-store' 
   });
 
+  // If the data fetch() got a error or something else.
+  if (!res.ok) return <div>Failed to load data</div>;
   // Convart res
   const data = await res.json();
 
