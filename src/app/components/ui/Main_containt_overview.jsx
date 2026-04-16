@@ -1,34 +1,15 @@
 import React from "react";
+import { worldsData } from "../../../../data/WorldsData";
 
 const Main_containt_overview = async () => {
+  /* NOTE: Originally I implemented data fetching via Custom API (SSR/ISR).
+     Due to build-time restrictions (ECONNREFUSED) on static hosting, 
+     I am currently using direct data injection for SSG performance.
+     The API route is still available at /api/worlds for reference.
+  */
 
-  // Get the base url form .env.local
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-
-  if (!baseUrl) {
-    return <div className="p-10 text-gold-dim">Connecting to archive...</div>;
-  }
-
-  let data = [];
-
-  try {
-    // fetch() form custom api
-    const res = await fetch(`${baseUrl}/api/worlds`, { 
-      cache: 'no-store' 
-    });
-
-    // Convart res
-    if (res.ok) {
-      data = await res.json();
-    }
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return <div className="p-10 text-red-500">Error: Could not retrieve worlds from the void.</div>;
-  }
-
-  if (!data || data.length === 0) {
-    return <div className="p-10 text-gold-dim">No worlds found in the archive.</div>;
-  }
+  // const res = await fetch(`${baseUrl}/api/worlds`); // Commented for build safety
+  const data = worldsData;
 
   return (
     <div
