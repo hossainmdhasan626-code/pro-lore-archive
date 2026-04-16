@@ -1,8 +1,8 @@
 // This component was the header navigation section
 
 import React from "react";
-import { NAV_ITEMS } from "../../../../data/Navigation_data";
 import Link from "next/link";
+import { NAV_ITEMS } from "@/app/data/Navigation_data";
 
 const Navigation = () => {
   const data = NAV_ITEMS;
