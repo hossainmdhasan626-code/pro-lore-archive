@@ -1,5 +1,5 @@
+import { worldsData } from "@/app/data/WorldsData";
 import React from "react";
-import { worldsData } from "../../../../data/WorldsData";
 
 const Main_containt_overview = async () => {
   /* NOTE: Originally I implemented data fetching via Custom API (SSR/ISR).
