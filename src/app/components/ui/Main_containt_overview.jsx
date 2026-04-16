@@ -5,15 +5,30 @@ const Main_containt_overview = async () => {
   // Get the base url form .env.local
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 
-  // fetch() data form custom api 
-  const res = await fetch(`${baseUrl}/api/worlds`, { 
-    cache: 'no-store' 
-  });
+  if (!baseUrl) {
+    return <div className="p-10 text-gold-dim">Connecting to archive...</div>;
+  }
 
-  // If the data fetch() got a error or something else.
-  if (!res.ok) return <div>Failed to load data</div>;
-  // Convart res
-  const data = await res.json();
+  let data = [];
+
+  try {
+    // fetch() form custom api
+    const res = await fetch(`${baseUrl}/api/worlds`, { 
+      cache: 'no-store' 
+    });
+
+    // Convart res
+    if (res.ok) {
+      data = await res.json();
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return <div className="p-10 text-red-500">Error: Could not retrieve worlds from the void.</div>;
+  }
+
+  if (!data || data.length === 0) {
+    return <div className="p-10 text-gold-dim">No worlds found in the archive.</div>;
+  }
 
   return (
     <div
