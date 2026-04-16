@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lore Archive — Fictional World Encyclopedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0c0a08;
+  --bg2:       #13110e;
+  --bg3:       #1c1814;
+  --border:    rgba(180,140,80,0.18);
+  --border2:   rgba(180,140,80,0.35);
+  --gold:      #c9a84c;
+  --gold2:     #e8c96a;
+  --gold-dim:  rgba(201,168,76,0.15);
+  --text:      #e8e0d0;
+  --text2:     #a89880;
+  --text3:     #6a5c48;
+  --red:       #8b2a2a;
+  --red-light: #c44040;
+  --teal:      #2a6b6b;
+  --teal-light:#40a8a8;
+  --purple:    #4a2a6b;
+  --purple-light:#8a5abf;
+  --radius:    4px;
+  --nav-w:     240px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Crimson Pro', serif;
+  font-size: 17px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── NOISE TEXTURE ─── */
+body::before {
+  content:'';
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.4;
+}
+
+/* ─── LAYOUT ─── */
+.app { display:flex; min-height:100vh; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--nav-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.sidebar-logo {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo .logo-text {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.sidebar-logo .logo-sub {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.world-switcher {
+  margin: 16px 16px 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.world-switcher .world-name {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+.world-switcher .chevron {
+  color: var(--text3);
+  font-size: 10px;
+}
+
+.nav-section {
+  padding: 20px 16px 8px;
+}
+.nav-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding-left: 8px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 14px;
+  font-family: 'Crimson Pro', serif;
+  letter-spacing: 0.03em;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+}
+.nav-item:hover { background: var(--gold-dim); color: var(--text); border-color: var(--border); }
+.nav-item.active { background: var(--gold-dim); color: var(--gold); border-color: var(--border2); }
+.nav-item .nav-icon { width: 16px; text-align: center; font-size: 13px; opacity: 0.7; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+.new-entry-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--gold-dim);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.new-entry-btn:hover { background: rgba(201,168,76,0.25); }
+
+/* ─── MAIN CONTENT ─── */
+.main { flex: 1; overflow-y: auto; }
+
+/* ─── PAGE SWITCHER ─── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ─── TOPBAR ─── */
+.topbar {
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--text3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.topbar-right { display: flex; gap: 12px; align-items: center; }
+.search-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 7px 14px;
+  color: var(--text);
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px;
+  width: 220px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box::placeholder { color: var(--text3); }
+.search-box:focus { border-color: var(--border2); }
+.filter-chip {
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.15s;
+}
+.filter-chip:hover, .filter-chip.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
+/* ─── HOME PAGE ─── */
+.home-hero {
+  padding: 60px 36px 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::before {
+  content: 'LORE';
+  position: absolute;
+  font-family: 'Cinzel', serif;
+  font-size: 200px;
+  font-weight: 700;
+  color: rgba(201,168,76,0.03);
+  top: -20px;
+  right: -10px;
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  line-height: 1;
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+.hero-title span { color: var(--gold); }
+.hero-desc {
+  color: var(--text2);
+  font-size: 18px;
+  max-width: 480px;
+  font-style: italic;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 36px;
+}
+.stat { }
+.stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 600;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.world-grid {
+  padding: 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.world-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.world-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent, var(--gold));
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.world-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.world-card:hover::before { opacity: 1; }
+.world-card.teal { --accent: var(--teal-light); }
+.world-card.red { --accent: var(--red-light); }
+.world-card.purple { --accent: var(--purple-light); }
+
+.world-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.world-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+.world-card-desc {
+  font-size: 14px;
+  color: var(--text2);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.world-card-meta {
+  display: flex;
+  gap: 16px;
+}
+.meta-item {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.meta-item span { color: var(--text2); }
+
+/* ─── WORLD OVERVIEW ─── */
+.world-overview-header {
+  padding: 48px 36px 36px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 36px;
+}
+.world-overview-left {}
+.world-overview-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.world-overview-title {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.world-overview-lore {
+  color: var(--text2);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 520px;
+}
+.world-info-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  align-self: start;
+}
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.info-row:last-child { border-bottom: none; }
+.info-key { color: var(--text3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.info-val { color: var(--text); text-align: right; }
+
+.world-sections {
+  padding: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.section-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.section-card:hover { border-color: var(--border2); }
+.section-card-icon { font-size: 24px; margin-bottom: 12px; }
+.section-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.section-card-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+}
+
+/* ─── CHARACTERS PAGE ─── */
+.page-content { padding: 36px; }
+
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.char-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.char-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.char-avatar {
+  width: 48px; height: 48px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.char-title {
+  font-size: 13px;
+  color: var(--text3);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.char-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+}
+.tag.gold { border-color: rgba(201,168,76,0.4); color: var(--gold); background: var(--gold-dim); }
+.tag.red { border-color: rgba(196,64,64,0.4); color: var(--red-light); background: rgba(139,42,42,0.12); }
+.tag.teal { border-color: rgba(64,168,168,0.4); color: var(--teal-light); background: rgba(42,107,107,0.12); }
+
+/* ─── SINGLE CHARACTER PAGE ─── */
+.char-detail-header {
+  padding: 48px 36px 36px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: auto 1fr 260px;
+  gap: 28px;
+  align-items: start;
+}
+.char-detail-avatar {
+  width: 80px; height: 80px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.char-detail-name {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.char-detail-epithet {
+  font-size: 16px;
+  color: var(--gold);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.char-detail-tagline {
+  color: var(--text2);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 400px;
+}
+.char-detail-tags { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+.char-detail-body {
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 36px;
+}
+.lore-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.lore-text {
+  color: var(--text2);
+  font-size: 16px;
+  line-height: 1.9;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+.lore-text strong { color: var(--text); font-style: normal; font-weight: 400; }
+
+.relations-list { display: flex; flex-direction: column; gap: 10px; }
+.relation-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.relation-avatar {
+  width: 32px; height: 32px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.relation-info {}
+.relation-name { font-size: 13px; color: var(--text); font-family: 'Cinzel', serif; }
+.relation-type { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; }
+
+/* ─── TIMELINE PAGE ─── */
+.timeline-container {
+  padding: 36px;
+  position: relative;
+}
+.timeline-line {
+  position: absolute;
+  left: 72px;
+  top: 36px;
+  bottom: 36px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent);
+}
+.timeline-items { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 72px auto 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 20px 0;
+}
+.timeline-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  text-align: right;
+  padding-top: 4px;
+}
+.timeline-dot {
+  width: 10px; height: 10px;
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  background: var(--bg2);
+  margin-top: 5px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.timeline-dot.major {
+  width: 12px; height: 12px;
+  background: var(--gold-dim);
+  border-color: var(--gold);
+}
+.timeline-content {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.timeline-content:hover { border-color: var(--border2); }
+.timeline-event-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.timeline-event-type.war { color: var(--red-light); }
+.timeline-event-type.political { color: var(--teal-light); }
+.timeline-event-type.arcane { color: var(--purple-light); }
+.timeline-event-name {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.timeline-event-desc {
+  font-size: 14px;
+  color: var(--text2);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ─── PLACES PAGE ─── */
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.place-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.place-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.place-map-placeholder {
+  height: 100px;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.place-map-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(180,140,80,0.04) 20px, rgba(180,140,80,0.04) 21px),
+    repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(180,140,80,0.04) 20px, rgba(180,140,80,0.04) 21px);
+}
+.place-map-icon { font-size: 28px; position: relative; z-index: 1; opacity: 0.5; }
+.place-card-body { padding: 16px 18px; }
+.place-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.place-name {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.place-desc {
+  font-size: 13px;
+  color: var(--text2);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+.breadcrumb span { color: var(--text3); }
+.breadcrumb a { color: var(--text2); cursor: pointer; }
+.breadcrumb a:hover { color: var(--gold); }
+
+/* ─── DIVIDER ─── */
+.ornament {
+  text-align: center;
+  color: var(--text3);
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  letter-spacing: 0.5em;
+  margin: 8px 0;
+  opacity: 0.4;
+}
+
+/* ─── PAGE LABEL (for reference) ─── */
+.page-ref-label {
+  position: sticky;
+  top: 0;
+  right: 0;
+  background: rgba(201,168,76,0.08);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 6px 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.page-ref-label::before {
+  content: '→';
+  opacity: 0.6;
+}
+
+/* ─── SIDEBAR PAGE INDICATORS ─── */
+.nav-item .next-route {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+}
+
+/* animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page.active .hero-title,
+.page.active .world-card,
+.page.active .char-card,
+.page.active .timeline-item,
+.page.active .place-card {
+  animation: fadeUp 0.4s ease both;
+}
+.page.active .world-card:nth-child(2) { animation-delay: 0.06s; }
+.page.active .world-card:nth-child(3) { animation-delay: 0.12s; }
+.page.active .char-card:nth-child(2) { animation-delay: 0.06s; }
+.page.active .char-card:nth-child(3) { animation-delay: 0.12s; }
+.page.active .char-card:nth-child(4) { animation-delay: 0.18s; }
+.page.active .timeline-item:nth-child(2) { animation-delay: 0.08s; }
+.page.active .timeline-item:nth-child(3) { animation-delay: 0.16s; }
+.page.active .timeline-item:nth-child(4) { animation-delay: 0.24s; }
+.page.active .place-card:nth-child(2) { animation-delay: 0.08s; }
+.page.active .place-card:nth-child(3) { animation-delay: 0.16s; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ─── SIDEBAR ─── -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">Lore Archive</div>
+      <div class="logo-sub">v0.1.0 · fictional worlds</div>
+    </div>
+
+    <div class="world-switcher" onclick="showPage('home')">
+      <span class="world-name">Aethermoor</span>
+      <span class="chevron">▾</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Navigate</div>
+      <div class="nav-item active" onclick="setNav(this,'home')">
+        <span class="nav-icon">⬡</span> Overview
+        <span class="next-route">/</span>
+      </div>
+      <div class="nav-item" onclick="setNav(this,'world')">
+        <span class="nav-icon">◎</span> World
+        <span class="next-route">/[world]</span>
+      </div>
+      <div class="nav-item" onclick="setNav(this,'characters')">
+        <span class="nav-icon">◈</span> Characters
+        <span class="next-route">/characters</span>
+      </div>
+      <div class="nav-item" onclick="setNav(this,'char-detail')">
+        <span class="nav-icon">◉</span> Character ↳
+        <span class="next-route">/[id]</span>
+      </div>
+      <div class="nav-item" onclick="setNav(this,'places')">
+        <span class="nav-icon">◇</span> Places
+        <span class="next-route">/places</span>
+      </div>
+      <div class="nav-item" onclick="setNav(this,'timeline')">
+        <span class="nav-icon">◁</span> Timeline
+        <span class="next-route">/timeline</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Data</div>
+      <div class="nav-item" onclick="setNav(this,'api')">
+        <span class="nav-icon">⬖</span> API Routes
+        <span class="next-route">/api</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="new-entry-btn">+ New Entry</button>
+    </div>
+  </nav>
+
+  <!-- ─── MAIN ─── -->
+  <main class="main">
+
+    <!-- ══════════════════════════════════════
+         PAGE 1 — HOME  (route: /)
+         Next.js: app/page.tsx — SSG
+    ══════════════════════════════════════ -->
+    <div class="page active" id="page-home">
+      <div class="page-ref-label">app/page.tsx — Static Home (SSG)</div>
+      <div class="topbar">
+        <span class="topbar-title">All Worlds</span>
+        <div class="topbar-right">
+          <input class="search-box" placeholder="Search worlds...">
+        </div>
+      </div>
+
+      <div class="home-hero">
+        <div class="hero-eyebrow">Your fictional encyclopedia</div>
+        <h1 class="hero-title">Every world<br>deserves a <span>record.</span></h1>
+        <p class="hero-desc">Build, explore, and connect the lore of worlds that exist only in your imagination.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Worlds</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">47</div>
+            <div class="stat-label">Characters</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">128</div>
+            <div class="stat-label">Entries</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="world-grid">
+        <div class="world-card" onclick="setNav(document.querySelector('.nav-item:nth-child(2)'),'world')">
+          <div class="world-tag">Fantasy · High Magic</div>
+          <div class="world-card-title">Aethermoor</div>
+          <div class="world-card-desc">"Where the veil between worlds grows thin, and forgotten gods still whisper in the dark."</div>
+          <div class="world-card-meta">
+            <div class="meta-item"><span>24</span> characters</div>
+            <div class="meta-item"><span>12</span> places</div>
+            <div class="meta-item"><span>36</span> events</div>
+          </div>
+        </div>
+        <div class="world-card teal">
+          <div class="world-tag">Sci-Fi · Post-Collapse</div>
+          <div class="world-card-title">The Drift</div>
+          <div class="world-card-desc">"Three hundred years after the Silence, humanity survives in orbital arks above a dying Earth."</div>
+          <div class="world-card-meta">
+            <div class="meta-item"><span>18</span> characters</div>
+            <div class="meta-item"><span>8</span> places</div>
+            <div class="meta-item"><span>22</span> events</div>
+          </div>
+        </div>
+        <div class="world-card red">
+          <div class="world-tag">Horror · Cosmic</div>
+          <div class="world-card-title">Below the Fold</div>
+          <div class="world-card-desc">"A small town in Vermont where the cartographers keep drawing maps that disagree with each other."</div>
+          <div class="world-card-meta">
+            <div class="meta-item"><span>5</span> characters</div>
+            <div class="meta-item"><span>4</span> places</div>
+            <div class="meta-item"><span>11</span> events</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         PAGE 2 — WORLD OVERVIEW  (route: /[worldId])
+         Next.js: app/[worldId]/page.tsx — SSG + generateStaticParams
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-world">
+      <div class="page-ref-label">app/[worldId]/page.tsx — SSG + generateStaticParams()</div>
+      <div class="topbar">
+        <span class="topbar-title">World Overview</span>
+      </div>
+
+      <div class="world-overview-header">
+        <div class="world-overview-left">
+          <div class="world-overview-eyebrow">World · Aethermoor</div>
+          <h2 class="world-overview-title">The World of<br>Aethermoor</h2>
+          <p class="world-overview-lore">"In the age before the Sundering, when the Aether still flowed freely through the ley lines of the land, the old kingdoms rose and fell like tides—each leaving behind ruins and relics that the new world has yet to understand."</p>
+        </div>
+        <div class="world-info-panel">
+          <div class="info-row">
+            <span class="info-key">Genre</span>
+            <span class="info-val">High Fantasy</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Magic</span>
+            <span class="info-val">Aetheric Weaving</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Era</span>
+            <span class="info-val">Third Age</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Characters</span>
+            <span class="info-val">24</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Places</span>
+            <span class="info-val">12</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Timeline Events</span>
+            <span class="info-val">36</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="world-sections">
+        <div class="section-card" onclick="setNav(document.querySelector('.nav-item:nth-child(3)'),'characters')">
+          <div class="section-card-icon">◈</div>
+          <div class="section-card-title">Characters</div>
+          <div class="section-card-count">24 entries · /characters</div>
+        </div>
+        <div class="section-card" onclick="setNav(document.querySelector('.nav-item:nth-child(5)'),'places')">
+          <div class="section-card-icon">◇</div>
+          <div class="section-card-title">Places</div>
+          <div class="section-card-count">12 entries · /places</div>
+        </div>
+        <div class="section-card" onclick="setNav(document.querySelector('.nav-item:nth-child(6)'),'timeline')">
+          <div class="section-card-icon">◁</div>
+          <div class="section-card-title">Timeline</div>
+          <div class="section-card-count">36 events · /timeline</div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-icon">⬡</div>
+          <div class="section-card-title">Factions</div>
+          <div class="section-card-count">8 entries · /factions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         PAGE 3 — CHARACTERS LIST  (route: /[worldId]/characters)
+         Next.js: app/[worldId]/characters/page.tsx — SSR (search is dynamic)
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-characters">
+      <div class="page-ref-label">app/[worldId]/characters/page.tsx — SSR (search query is dynamic)</div>
+      <div class="topbar">
+        <span class="topbar-title">Characters</span>
+        <div class="topbar-right">
+          <input class="search-box" placeholder="Search characters...">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">Hero</span>
+          <span class="filter-chip">Villain</span>
+          <span class="filter-chip">NPC</span>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <div class="char-grid">
+          <div class="char-card" onclick="setNav(document.querySelector('.nav-item:nth-child(4)'),'char-detail')">
+            <div class="char-avatar">E</div>
+            <div class="char-name">Elowen Ashveil</div>
+            <div class="char-title">The Last Threadweaver</div>
+            <div class="char-tags">
+              <span class="tag gold">Protagonist</span>
+              <span class="tag">Mage</span>
+            </div>
+          </div>
+          <div class="char-card">
+            <div class="char-avatar">V</div>
+            <div class="char-name">Vael Duskborne</div>
+            <div class="char-title">Warden of the Hollow</div>
+            <div class="char-tags">
+              <span class="tag red">Antagonist</span>
+              <span class="tag">Undead</span>
+            </div>
+          </div>
+          <div class="char-card">
+            <div class="char-avatar">T</div>
+            <div class="char-name">Thorn Irenbeck</div>
+            <div class="char-title">Former King's Blade</div>
+            <div class="char-tags">
+              <span class="tag">Ally</span>
+              <span class="tag teal">Soldier</span>
+            </div>
+          </div>
+          <div class="char-card">
+            <div class="char-avatar">S</div>
+            <div class="char-name">Sera of the Fold</div>
+            <div class="char-title">Oracle Without Name</div>
+            <div class="char-tags">
+              <span class="tag">Neutral</span>
+              <span class="tag">Seer</span>
+            </div>
+          </div>
+          <div class="char-card">
+            <div class="char-avatar">K</div>
+            <div class="char-name">Kael Mourne</div>
+            <div class="char-title">The Twice-Burned</div>
+            <div class="char-tags">
+              <span class="tag gold">Protagonist</span>
+              <span class="tag">Warlock</span>
+            </div>
+          </div>
+          <div class="char-card">
+            <div class="char-avatar">M</div>
+            <div class="char-name">Mireth the Pale</div>
+            <div class="char-title">Keeper of the Aethergate</div>
+            <div class="char-tags">
+              <span class="tag">NPC</span>
+              <span class="tag teal">Ancient</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         PAGE 4 — SINGLE CHARACTER  (route: /[worldId]/characters/[id])
+         Next.js: app/[worldId]/characters/[id]/page.tsx — SSG + ISR (revalidate: 60)
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-char-detail">
+      <div class="page-ref-label">app/[worldId]/characters/[id]/page.tsx — SSG + ISR (revalidate: 60)</div>
+      <div class="topbar">
+        <span class="topbar-title">Character Detail</span>
+      </div>
+
+      <div class="char-detail-header">
+        <div class="char-detail-avatar">E</div>
+        <div>
+          <div class="char-detail-name">Elowen Ashveil</div>
+          <div class="char-detail-epithet">"The Last Threadweaver"</div>
+          <div class="char-detail-tagline">A mage who can see the fraying edges of the world's magic—and knows that someone is pulling the threads loose on purpose.</div>
+          <div class="char-detail-tags">
+            <span class="tag gold">Protagonist</span>
+            <span class="tag">Mage</span>
+            <span class="tag">Aethermoor</span>
+            <span class="tag teal">Third Age</span>
+          </div>
+        </div>
+        <div class="world-info-panel">
+          <div class="info-row">
+            <span class="info-key">Age</span>
+            <span class="info-val">34</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Faction</span>
+            <span class="info-val">The Unravelers</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Origin</span>
+            <span class="info-val">Ashveil Keep</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Magic Type</span>
+            <span class="info-val">Threadweaving</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Status</span>
+            <span class="info-val">Alive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="char-detail-body">
+        <div>
+          <div class="lore-section-title">History</div>
+          <p class="lore-text">Born in the shadow of <strong>Ashveil Keep</strong>, Elowen showed signs of Threadweaving ability before she could speak. The Aetheric threads that bind the world's magic together were visible to her as faint silver filaments—beautiful, and increasingly frayed. She was taken from her family at age seven by the <strong>Conclave of the Woven</strong>, trained, and eventually exiled when she refused to stop reporting what she saw: the world's magic was being deliberately unraveled from somewhere deep below the Hollow Peaks.</p>
+
+          <div class="lore-section-title">Motivation</div>
+          <p class="lore-text">Elowen does not want to save the world out of heroism. She wants to <strong>understand it</strong>. The fraying she sees is a pattern—elegant, intentional, mathematical. Whoever is unraveling the Aether is doing it like a craftsperson, not a destroyer. She needs to know why before she decides whether to stop them.</p>
+
+          <div class="lore-section-title">Key Events</div>
+          <p class="lore-text">Survived the <strong>Sundering of the Third Gate</strong> (Year 312). Discovered the <strong>Ashveil Codex</strong> beneath her family's ruins. First encounter with Vael Duskborne at the <strong>Mirrorfen Crossing</strong>. Currently seeks the <strong>Oracle Sera</strong> in the Unmapped Reaches.</p>
+        </div>
+
+        <div>
+          <div class="lore-section-title">Relationships</div>
+          <div class="relations-list">
+            <div class="relation-item">
+              <div class="relation-avatar">V</div>
+              <div class="relation-info">
+                <div class="relation-name">Vael Duskborne</div>
+                <div class="relation-type">Antagonist · Unknown motive</div>
+              </div>
+            </div>
+            <div class="relation-item">
+              <div class="relation-avatar">T</div>
+              <div class="relation-info">
+                <div class="relation-name">Thorn Irenbeck</div>
+                <div class="relation-type">Ally · Reluctant guardian</div>
+              </div>
+            </div>
+            <div class="relation-item">
+              <div class="relation-avatar">S</div>
+              <div class="relation-info">
+                <div class="relation-name">Sera of the Fold</div>
+                <div class="relation-type">Unknown · Prophesied meeting</div>
+              </div>
+            </div>
+            <div class="relation-item">
+              <div class="relation-avatar">K</div>
+              <div class="relation-info">
+                <div class="relation-name">Kael Mourne</div>
+                <div class="relation-type">Former student · Estranged</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lore-section-title" style="margin-top:24px;">Appears In</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="relation-item">
+              <div class="relation-info">
+                <div class="relation-name">The Sundering (Year 312)</div>
+                <div class="relation-type">Timeline event</div>
+              </div>
+            </div>
+            <div class="relation-item">
+              <div class="relation-info">
+                <div class="relation-name">Ashveil Keep</div>
+                <div class="relation-type">Place of origin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         PAGE 5 — PLACES  (route: /[worldId]/places)
+         Next.js: app/[worldId]/places/page.tsx — SSG
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-places">
+      <div class="page-ref-label">app/[worldId]/places/page.tsx — SSG</div>
+      <div class="topbar">
+        <span class="topbar-title">Places</span>
+        <div class="topbar-right">
+          <input class="search-box" placeholder="Search places...">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">City</span>
+          <span class="filter-chip">Ruin</span>
+          <span class="filter-chip">Wilderness</span>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <div class="places-grid">
+          <div class="place-card">
+            <div class="place-map-placeholder">
+              <div class="place-map-icon">⬡</div>
+            </div>
+            <div class="place-card-body">
+              <div class="place-type">City · Capital</div>
+              <div class="place-name">Vethara Prime</div>
+              <div class="place-desc">The seat of the Conclave. A city built atop an ancient Aetheric node, its spires perpetually wrapped in silver mist.</div>
+            </div>
+          </div>
+          <div class="place-card">
+            <div class="place-map-placeholder">
+              <div class="place-map-icon">◎</div>
+            </div>
+            <div class="place-card-body">
+              <div class="place-type">Ruin · Forbidden</div>
+              <div class="place-name">Ashveil Keep</div>
+              <div class="place-desc">The ancestral home of the Ashveil family. Destroyed in Year 298. What remains beneath it is still unmapped.</div>
+            </div>
+          </div>
+          <div class="place-card">
+            <div class="place-map-placeholder">
+              <div class="place-map-icon">◇</div>
+            </div>
+            <div class="place-card-body">
+              <div class="place-type">Wilderness · Anomaly</div>
+              <div class="place-name">The Mirrorfen</div>
+              <div class="place-desc">A wetland where reflections show not what is, but what was. Navigation is possible only at dawn.</div>
+            </div>
+          </div>
+          <div class="place-card">
+            <div class="place-map-placeholder">
+              <div class="place-map-icon">▽</div>
+            </div>
+            <div class="place-card-body">
+              <div class="place-type">Underground · Active</div>
+              <div class="place-name">The Hollow Peaks</div>
+              <div class="place-desc">A mountain range with nothing inside them. The source of the Aetheric unraveling, according to Elowen's observations.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         PAGE 6 — TIMELINE  (route: /[worldId]/timeline)
+         Next.js: app/[worldId]/timeline/page.tsx — ISR (revalidate: 3600)
+                  Client Component for interactivity + custom hook useTimeline()
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-timeline">
+      <div class="page-ref-label">app/[worldId]/timeline/page.tsx — ISR + 'use client' + useTimeline() hook</div>
+      <div class="topbar">
+        <span class="topbar-title">Timeline</span>
+        <div class="topbar-right">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">War</span>
+          <span class="filter-chip">Political</span>
+          <span class="filter-chip">Arcane</span>
+        </div>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div class="timeline-items">
+
+          <div class="timeline-item">
+            <div class="timeline-year">Yr 1</div>
+            <div class="timeline-dot major"></div>
+            <div class="timeline-content">
+              <div class="timeline-event-type arcane">Arcane</div>
+              <div class="timeline-event-name">The First Weaving</div>
+              <div class="timeline-event-desc">The Aetheric network is established by the Founders. The ley lines are mapped for the first time.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">Yr 148</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-event-type war">War</div>
+              <div class="timeline-event-name">The Hollow War</div>
+              <div class="timeline-event-desc">Seven kingdoms fight for control of the Aetheric nodes. Ends with the Pact of Mist.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">Yr 298</div>
+            <div class="timeline-dot major"></div>
+            <div class="timeline-content">
+              <div class="timeline-event-type war">War</div>
+              <div class="timeline-event-name">Destruction of Ashveil Keep</div>
+              <div class="timeline-event-desc">The Conclave orders the Keep razed after discovering the Ashveil Codex within its walls. The family scatters.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">Yr 312</div>
+            <div class="timeline-dot major"></div>
+            <div class="timeline-content">
+              <div class="timeline-event-type arcane">Arcane</div>
+              <div class="timeline-event-name">The Sundering of the Third Gate</div>
+              <div class="timeline-event-desc">The third Aetheric gate collapses. Elowen Ashveil is the only known survivor of the collapse site. The fraying accelerates.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">Yr 341</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-event-type political">Political</div>
+              <div class="timeline-event-name">Elowen Exiled by Conclave</div>
+              <div class="timeline-event-desc">After publishing her findings on the deliberate nature of the Aetheric decay, the Conclave strips her rank and expels her from Vethara Prime.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">Yr 342</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-event-type arcane">Arcane</div>
+              <div class="timeline-event-name">First Contact: Vael Duskborne</div>
+              <div class="timeline-event-desc">Elowen encounters the Warden of the Hollow at Mirrorfen Crossing. He lets her pass. Neither understands why.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         PAGE 7 — API ROUTES REFERENCE
+         Next.js: app/api/characters/route.ts
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-api">
+      <div class="page-ref-label">app/api/ — Next.js API Routes (route.ts files)</div>
+      <div class="topbar">
+        <span class="topbar-title">API Routes</span>
+      </div>
+
+      <div class="page-content" style="max-width:680px;">
+        <p style="color:var(--text2);font-style:italic;margin-bottom:28px;font-size:15px;">These are the Next.js API routes your frontend components will fetch from. Each is a <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);background:var(--gold-dim);padding:2px 6px;border-radius:2px;">route.ts</code> file inside the <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);background:var(--gold-dim);padding:2px 6px;border-radius:2px;">app/api/</code> folder.</p>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+              <span style="background:rgba(64,168,168,0.15);color:var(--teal-light);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:2px;letter-spacing:0.1em;">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);">/api/characters?world=aethermoor&search=elowen</code>
+            </div>
+            <div style="padding:14px 20px;">
+              <p style="font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;">Returns a list of characters. Supports <code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;">world</code> and <code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;">search</code> query params.</p>
+              <p style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Used by: /characters page (SSR) via searchParams</p>
+            </div>
+          </div>
+
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+              <span style="background:rgba(64,168,168,0.15);color:var(--teal-light);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:2px;letter-spacing:0.1em;">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);">/api/characters/[id]</code>
+            </div>
+            <div style="padding:14px 20px;">
+              <p style="font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;">Returns a single character with full lore, relationships, and related events.</p>
+              <p style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Used by: /characters/[id] page (ISR) via generateStaticParams + fetch</p>
+            </div>
+          </div>
+
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+              <span style="background:rgba(64,168,168,0.15);color:var(--teal-light);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:2px;letter-spacing:0.1em;">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);">/api/places?world=aethermoor</code>
+            </div>
+            <div style="padding:14px 20px;">
+              <p style="font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;">Returns all places for a given world.</p>
+              <p style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Used by: /places page (SSG)</p>
+            </div>
+          </div>
+
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+              <span style="background:rgba(64,168,168,0.15);color:var(--teal-light);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:2px;letter-spacing:0.1em;">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);">/api/timeline?world=aethermoor&type=war</code>
+            </div>
+            <div style="padding:14px 20px;">
+              <p style="font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;">Returns timeline events. Filterable by event type. Used by the <code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;">useTimeline()</code> custom hook.</p>
+              <p style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Used by: /timeline page ('use client' component)</p>
+            </div>
+          </div>
+
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+              <span style="background:rgba(201,168,76,0.12);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:2px;letter-spacing:0.1em;">POST</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);">/api/characters</code>
+            </div>
+            <div style="padding:14px 20px;">
+              <p style="font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;">Creates a new character entry. Body: <code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;">&#123; name, worldId, lore, tags &#125;</code></p>
+              <p style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Used by: "+ New Entry" button → triggers ISR revalidation</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) {
+    target.classList.add('active');
+    target.scrollTop = 0;
+  }
+}
+
+function setNav(el, pageId) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el && el.classList) el.classList.add('active');
+  showPage(pageId);
+}
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    this.closest('.topbar-right').querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
