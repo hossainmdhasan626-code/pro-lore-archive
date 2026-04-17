@@ -101,9 +101,9 @@ const page = async ({ params }) => {
           <p
             className="pt-5
         font-crimson text-text-body-secondary text-[18px] leading-[1.7] italic"
-          >
-            {data?.details?.fullStory}
-          </p>
+            // HTML codverted to text .
+            dangerouslySetInnerHTML={{ __html: data?.details?.fullStory }}
+          />
         </div>
 
         {/* World details */}

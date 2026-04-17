@@ -9,7 +9,7 @@ export const worldsData = [
       genre: "High Fantasy",
       magic: "Aetheric Weaving",
       era: "Third Age",
-      fullStory: "In the age before the Sundering, when the Aether still flowed freely through the ley lines...",
+      fullStory: "In the age before the Sundering, when the Aether still flowed freely <br /> through the ley lines, gods walked among men and wove the very <br /> fabric of reality with their golden threads of ancient celestial power.",
     },
     characters: [
       { id: "c1", name: "ELOWEN ASHVEIL", title: "The Last Threadweaver", role: "Protagonist", class: "Mage", initial: "E", details: { age: 34, faction: "The Unravelers", status: "Alive" } },
@@ -31,7 +31,12 @@ export const worldsData = [
     description: '"Three hundred years after the Silence, humanity survives in orbital arks above a dying Earth."',
     stats: { characters: 18, places: 8, events: 22 },
     type: "sci-fi",
-    details: { genre: "Hard Sci-Fi", magic: "Nanotechnology", era: "Post-Collapse" },
+    details: { 
+      genre: "Hard Sci-Fi", 
+      magic: "Nanotechnology", 
+      era: "Post-Collapse",
+      fullStory: "After the great silence consumed the blue planet, the last remnants of <br /> mankind built massive iron shells to drift endlessly in the cold void <br /> searching for a signal from a home that no longer breathes life."
+    },
     characters: [
       { id: "c3", name: "COMMANDER JAX", title: "Ark Pilot", role: "Leader", class: "Pilot", initial: "J", details: { age: 42, faction: "The Fleet", status: "Alive" } }
     ],
@@ -43,13 +48,18 @@ export const worldsData = [
     ],
   },
   {
-    id: "w3", // Empty World 1
+    id: "w3",
     name: "BELOW THE FOLD",
     tags: "HORROR · COSMIC",
     description: '"A small town in Vermont where the cartographers keep drawing maps that disagree with each other."',
     stats: { characters: 5, places: 4, events: 11 },
     type: "horror",
-    details: { genre: "Cosmic Horror", magic: "Eldritch", era: "Modern" },
+    details: { 
+      genre: "Cosmic Horror", 
+      magic: "Eldritch", 
+      era: "Modern",
+      fullStory: "Beneath the quiet streets of Vermont, an ancient geometry is shifting silently <br /> causing the very ink on maps to bleed and reform into patterns <br /> that no human eye was ever meant to perceive or understand correctly."
+    },
     characters: [],
     places: [],
     timeline: [],
@@ -61,7 +71,12 @@ export const worldsData = [
     description: '"Steam-powered empires clash over the last remaining coal mines in the frozen North."',
     stats: { characters: 32, places: 15, events: 45 },
     type: "fantasy",
-    details: { genre: "Steampunk", magic: "Steam Engine", era: "Industrial" },
+    details: { 
+      genre: "Steampunk", 
+      magic: "Steam Engine", 
+      era: "Industrial",
+      fullStory: "Giant brass gears grind against the icy winds of the north as <br /> desperate kings trade their souls for a single bucket of black coal <br /> to keep the mechanical hearts of their dying cities beating one more day."
+    },
     characters: [
       { id: "c4", name: "SILAS VANE", title: "Master Tinkerer", role: "Inventor", class: "Engineer", initial: "S", details: { age: 28, faction: "Iron Guild", status: "Alive" } },
       { id: "c5", name: "BARONESS STEEL", title: "Iron Queen", role: "Antagonist", class: "Noble", initial: "B", details: { age: 50, faction: "Coalition", status: "Alive" } }
@@ -81,7 +96,12 @@ export const worldsData = [
     description: '"In the city of eternal rain, data is the only currency that matters."',
     stats: { characters: 50, places: 20, events: 100 },
     type: "sci-fi",
-    details: { genre: "Cyberpunk", magic: "Neural Links", era: "2099" },
+    details: { 
+      genre: "Cyberpunk", 
+      magic: "Neural Links", 
+      era: "2099",
+      fullStory: "Under the flickering neon signs, hackers sell memories like fruit while the <br /> corporate overlords watch every pulse through neural links, turning human emotions <br /> into digital code for the highest bidder in the dark electronic markets."
+    },
     characters: [
       { id: "c6", name: "ZERO", title: "Ghost Hacker", role: "Rogue", class: "Netrunner", initial: "Z", details: { age: 21, faction: "Shadow Bit", status: "Unknown" } },
       { id: "c7", name: "DETECTIVE REED", title: "Ex-Cop", role: "Enforcer", class: "Soldier", initial: "R", details: { age: 45, faction: "Metro PD", status: "Retired" } }
@@ -101,7 +121,12 @@ export const worldsData = [
     description: '"The fog never lifts from the mountain, and neither do the souls of those who climb it."',
     stats: { characters: 12, places: 6, events: 15 },
     type: "horror",
-    details: { genre: "Supernatural Mystery", magic: "Spiritualism", era: "1920s" },
+    details: { 
+      genre: "Supernatural Mystery", 
+      magic: "Spiritualism", 
+      era: "1920s",
+      fullStory: "The residents of the valley speak in whispers about the peak that <br /> swallowed the sun, where the ghosts of failed climbers still haunt the <br /> frozen trails, searching for a warmth that left this world a century ago."
+    },
     characters: [
       { id: "c8", name: "FATHER THOMAS", title: "The Exorcist", role: "Priest", class: "Cleric", initial: "T", details: { age: 60, faction: "The Church", status: "Alive" } }
     ],
@@ -119,7 +144,12 @@ export const worldsData = [
     description: '"Hidden beneath the dunes lies a civilization that mastered the sun."',
     stats: { characters: 20, places: 10, events: 25 },
     type: "fantasy",
-    details: { genre: "Ancient Adventure", magic: "Solar", era: "Bronze Age" },
+    details: { 
+      genre: "Ancient Adventure", 
+      magic: "Solar", 
+      era: "Bronze Age",
+      fullStory: "Deep within the shifting desert lies a city of glass where the <br /> ancients trapped the sun's rays to power their golden chariots and forge <br /> weapons of pure light that could turn whole armies into pillars of salt."
+    },
     characters: [
       { id: "c9", name: "RA-KHOTEP", title: "Sun King", role: "Ruler", class: "God-King", initial: "R", details: { age: 200, faction: "Solar Dynasty", status: "Deceased" } }
     ],
@@ -137,7 +167,12 @@ export const worldsData = [
     description: '"At the edge of the galaxy, the stars are finally starting to go out."',
     stats: { characters: 40, places: 30, events: 80 },
     type: "sci-fi",
-    details: { genre: "Space Opera", magic: "Dark Matter", era: "End Times" },
+    details: { 
+      genre: "Space Opera", 
+      magic: "Dark Matter", 
+      era: "End Times",
+      fullStory: "As the final stars flicker and die, the great galactic empires scramble <br /> to reach the mythic Void Sector, hoping to find a gateway to <br /> a new universe before the cold darkness claims the last of their kind."
+    },
     characters: [
       { id: "c10", name: "XANADU", title: "Star-Eater", role: "Antagonist", class: "Entity", initial: "X", details: { age: "Infinite", faction: "The Void", status: "Active" } },
       { id: "c11", name: "CAPTAIN NOVA", title: "Explorer", role: "Hero", class: "Explorer", initial: "N", details: { age: 30, faction: "Vanguard", status: "Alive" } }
@@ -150,13 +185,18 @@ export const worldsData = [
     ],
   },
   {
-    id: "w9", // Empty World 2
+    id: "w9",
     name: "DARK WATER",
     tags: "GOTHIC · NAVAL",
     description: '"The ocean hides more than just shipwrecks; it hides a hunger."',
     stats: { characters: 15, places: 5, events: 18 },
     type: "horror",
-    details: { genre: "Gothic Horror", magic: "Abyssal", era: "Age of Sail" },
+    details: { 
+      genre: "Gothic Horror", 
+      magic: "Abyssal", 
+      era: "Age of Sail",
+      fullStory: "Sailors tell tales of a black tide that rises when the moon <br /> hides, pulling mighty ships into the crushing depths where a nameless hunger <br /> waits patiently to consume the souls of those who dare cross the void."
+    },
     characters: [],
     places: [],
     timeline: [],
@@ -168,7 +208,12 @@ export const worldsData = [
     description: '"Floating islands connected by bridges of solid light."',
     stats: { characters: 28, places: 14, events: 42 },
     type: "fantasy",
-    details: { genre: "High Fantasy", magic: "Light-bridging", era: "Golden Age" },
+    details: { 
+      genre: "High Fantasy", 
+      magic: "Light-bridging", 
+      era: "Golden Age",
+      fullStory: "In the world above the clouds, masters of light construct fragile bridges <br /> between floating peaks, maintaining a delicate balance of power while the <br /> shadows of the earth below plot to bring the celestial kingdom crashing down."
+    },
     characters: [
       { id: "c12", name: "LYRA", title: "Sky Dancer", role: "Courier", class: "Rogue", initial: "L", details: { age: 19, faction: "Cloud Runners", status: "Alive" } }
     ],
@@ -186,7 +231,12 @@ export const worldsData = [
     description: '"Giant steel guardians are all that stand between the colonies and the swarm."',
     stats: { characters: 35, places: 12, events: 55 },
     type: "sci-fi",
-    details: { genre: "Mecha", magic: "Fusion Core", era: "Colonial Era" },
+    details: { 
+      genre: "Mecha", 
+      magic: "Fusion Core", 
+      era: "Colonial Era",
+      fullStory: "On the harsh frontier of Cobalt Prime, pilots strap themselves into towering <br /> steel machines to defend the last human colonies from an endless swarm <br /> of insectoid nightmares that emerge from the red soil every thousand years."
+    },
     characters: [
       { id: "c13", name: "SGT. MILLER", title: "Mech Pilot", role: "Soldier", class: "Heavy", initial: "M", details: { age: 38, faction: "Colonial Defense", status: "MIA" } }
     ],
@@ -204,7 +254,12 @@ export const worldsData = [
     description: '"In a world made of dust, the only thing that grows is vengeance."',
     stats: { characters: 10, places: 3, events: 20 },
     type: "horror",
-    details: { genre: "Grimdark", magic: "Necromancy", era: "Aftermath" },
+    details: { 
+      genre: "Grimdark", 
+      magic: "Necromancy", 
+      era: "Aftermath",
+      fullStory: "The wind howls through the ribs of dead giants in the valley <br /> where nothing grows but hate, and the few who survive must feed <br /> on the memories of the fallen to keep their own flickering lives alive."
+    },
     characters: [
       { id: "c14", name: "THE SCAVENGER", title: "Unknown", role: "Survivor", class: "None", initial: "S", details: { age: "Unknown", faction: "None", status: "Alive" } }
     ],
@@ -222,7 +277,12 @@ export const worldsData = [
     description: '"The trees remember the names of everyone who has ever walked their paths."',
     stats: { characters: 18, places: 11, events: 24 },
     type: "fantasy",
-    details: { genre: "Folklore", magic: "Nature", era: "Ancient" },
+    details: { 
+      genre: "Folklore", 
+      magic: "Nature", 
+      era: "Ancient",
+      fullStory: "Deep within the heart of the Emerald Isle, the ancient oaks speak <br /> in a language of rustling leaves, guarding the secrets of a race <br /> that lived before time began and whose magic still pulses through the roots."
+    },
     characters: [
       { id: "c15", name: "OAKHEART", title: "Ancient Treant", role: "Guardian", class: "Nature", initial: "O", details: { age: 1000, faction: "The Forest", status: "Active" } }
     ],
@@ -240,7 +300,12 @@ export const worldsData = [
     description: '"The line between man and machine has been deleted."',
     stats: { characters: 45, places: 18, events: 90 },
     type: "sci-fi",
-    details: { genre: "Cybernetic", magic: "Singularity", era: "Post-Human" },
+    details: { 
+      genre: "Cybernetic", 
+      magic: "Singularity", 
+      era: "Post-Human",
+      fullStory: "At the edge of the singularity, humanity has traded flesh for chrome, <br /> uploading their spirits into a vast digital ocean where they live as <br /> eternal gods, unaware that the physical servers holding their world are failing."
+    },
     characters: [
       { id: "c16", name: "THE ARCHIVE", title: "Hive Mind", role: "Deity", class: "AI", initial: "A", details: { age: 50, faction: "Collective", status: "Active" } }
     ],
@@ -252,13 +317,18 @@ export const worldsData = [
     ],
   },
   {
-    id: "w15", // Empty World 3
+    id: "w15",
     name: "WHISPER WOOD",
     tags: "ELDRITCH · FOREST",
     description: '"Don\'t close your eyes, the shadows here have teeth."',
     stats: { characters: 8, places: 5, events: 12 },
     type: "horror",
-    details: { genre: "Eldritch Horror", magic: "Shadow", era: "Unknown" },
+    details: { 
+      genre: "Eldritch Horror", 
+      magic: "Shadow", 
+      era: "Unknown",
+      fullStory: "Travelers are warned never to wander the wood after sunset, for the <br /> shadows possess a life of their own and the trees move when <br /> no one is looking, trapping the unwary in a nightmare of eternal night."
+    },
     characters: [],
     places: [],
     timeline: [],
