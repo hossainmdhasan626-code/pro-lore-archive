@@ -57,7 +57,7 @@ const page = async ({ params }) => {
               href={`/world/${id}/characters/${item?.id}`} // ক্যারেক্টার ডিটেইলস এর জন্য
               className="p-6 
               bg-interactive-hover-bg 
-              border border-gold-border-dim hover:border-gold-accent-hover rounded-sm 
+              border-2 border-gold-border-dim hover:border-gold-accent-hover rounded-sm 
               transition-colors duration-600 group"
             >
               {/* Profile Circle with Initial */}
