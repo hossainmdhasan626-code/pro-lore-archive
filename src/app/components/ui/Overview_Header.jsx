@@ -4,12 +4,14 @@ import React from "react";
 
 const Overview_Header = () => {
   return (
-    <div className=" w-full 
+    <div
+      className=" w-full 
     px-3 py-6
     border border-gold-border-dim
-    flex justify-between">
+    flex justify-between"
+    >
       {/* Header text */}
-      <div className="font-cinzel tracking-[0.2em] text-text-body-secondary">
+      <div className="font-cinzel tracking-[0.2em] text-text-metadata-muted">
         All WORLD
       </div>
 
