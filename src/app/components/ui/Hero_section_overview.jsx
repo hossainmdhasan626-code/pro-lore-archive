@@ -1,24 +1,44 @@
 // Thise page was the hero section of the overview page .
 
+import { worldsData } from "@/app/data/WorldsData";
 import React from "react";
 
 const Hero_section_overview = () => {
-  // Data for count section
+  // Data collect form main data .
+  const world_data = worldsData;
+
+  // Write a fun() which work was sum the total characters are added .
+  // const total_characters = () => {
+  //   // Create a blank variable
+  //   let total_cha = 0;
+
+  //   // Do a for loop for extract total characters .
+  //   for (let index = 0; index < world_data.length; index++) {
+  //     // Count the length of the characters arrow .
+  //     const count = world_data[index]?.characters?.length;
+  //     // Add count to total_cha .
+  //     total_cha += count;
+  //   }
+  //   // Return the total_Cha .
+  //   return total_cha;
+  // };
+
+  // Extract total characters
+  const total_cha = world_data?.reduce((acc,world ) => {
+    return acc + world?.characters?.length;
+  },0);
+
+  // Custom arrow for count section
   const data = [
     {
       id: 1,
-      count: "3",
+      count: world_data?.length,
       label: "Worlds", // font-mono, text-text-metadata-muted
     },
     {
       id: 2,
-      count: "47",
-      label: "Characters", // font-mono, text-text-metadata-muted
-    },
-    {
-      id: 3,
-      count: "128",
-      label: "Entries", // font-mono, text-text-metadata-muted
+      count: total_cha,
+      label: "CHARACTERS", // font-mono, text-text-metadata-muted
     },
   ];
 
