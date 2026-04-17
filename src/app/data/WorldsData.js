@@ -4,7 +4,6 @@ export const worldsData = [
     name: "AETHERMOOR",
     tags: "FANTASY · HIGH MAGIC",
     description: '"Where the veil between worlds grows thin, and forgotten gods still whisper in the dark."',
-    stats: { characters: 24, places: 12, events: 36 },
     type: "fantasy",
     details: {
       genre: "High Fantasy",

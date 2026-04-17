@@ -1,4 +1,5 @@
 import { worldsData } from "@/app/data/WorldsData";
+import Link from "next/link";
 import React from "react";
 
 const Main_containt_overview = async () => {
@@ -25,7 +26,8 @@ const Main_containt_overview = async () => {
               : "border-t-status-danger-red";
 
         return (
-          <div
+          <Link
+          href={`world/${item?.id}`}
             key={item?.id}
             className={`w-full h-70 flex flex-col justify-between
           p-6 bg-card-sidebar-bg hover:bg-interactive-hover-bg transition-all
@@ -52,7 +54,7 @@ const Main_containt_overview = async () => {
             <div className="flex gap-5 pt-4 border-t border-gold-border-dim/30">
               <div>
                 <p className="font-mono text-text-heading-primary text-[12px] leading-none">
-                  {item?.stats?.characters}
+                  {item?.characters?.length}
                 </p>
                 <p className="font-mono text-text-metadata-muted text-[11px] uppercase tracking-tighter">
                   chars
@@ -60,7 +62,7 @@ const Main_containt_overview = async () => {
               </div>
               <div>
                 <p className="font-mono text-text-heading-primary text-[12px] leading-none">
-                  {item?.stats?.places}
+                  {item?.places?.length}
                 </p>
                 <p className="font-mono text-text-metadata-muted text-[11px] uppercase tracking-tighter">
                   places
@@ -68,14 +70,14 @@ const Main_containt_overview = async () => {
               </div>
               <div>
                 <p className="font-mono text-text-heading-primary text-[12px] leading-none">
-                  {item?.stats?.events}
+                  {item?.timeline.length}
                 </p>
                 <p className="font-mono text-text-metadata-muted text-[11px] uppercase tracking-tighter">
                   events
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

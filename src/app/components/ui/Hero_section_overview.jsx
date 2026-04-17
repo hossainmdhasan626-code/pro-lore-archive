@@ -76,9 +76,11 @@ const Hero_section_overview = () => {
         </div>
       </div>
 
-      {/* A horizontal line on the bottom */}
-      <div className="mt-10
-      border-t border-gold-border-dim"></div>
+      {/* A horizontal line on hero section bottom */}
+      <div
+        className="mt-10
+      border-t border-gold-border-dim"
+      ></div>
     </div>
   );
 };
