@@ -1,5 +1,6 @@
 // It's was a daynamic page for world overview .
 
+
 import { worldsData } from "@/app/data/WorldsData";
 import Link from "next/link";
 import React, { lazy } from "react";
@@ -8,10 +9,11 @@ const page = async ({ params }) => {
   // Collect the world id form params .
   const { id } = await params;
 
+  
   // Fine this particular world data by useing id .
   const data = worldsData.find((item) => item?.id === id);
 
-  // Create a arrow with the data for world section
+  // Create a custom arrow with the data for world section
   const world_details = [
     {
       id: 1,
@@ -45,29 +47,6 @@ const page = async ({ params }) => {
     },
   ];
 
-  //   Create a arrow for main content .
-  const main_content = [
-    {
-      id: 1,
-      label: "CHARACTERS",
-      value: `${data?.characters?.length} entries . /characters`,
-    },
-    {
-      id: 2,
-      label: "PLACES",
-      value: `${data?.places?.length} entries . /places`,
-    },
-    {
-      id: 3,
-      label: "TIMELINE",
-      value: `${data?.timeline.length} events . /timeline`,
-    },
-    {
-      id: 4,
-      label: "FACTIONS",
-      value: `${0} entries . /factions`,
-    },
-  ];
   return (
     <div>
       {/* Header */}
@@ -146,30 +125,85 @@ const page = async ({ params }) => {
 
       {/* Main content */}
       <div className="grid grid-cols-2 gap-6 p-10 ">
-        {/* Do a map() on main_content */}
-        {main_content?.map((item) => {
-          return (
-            <Link
-              href={"#"}
-              key={item?.id}
-              className="p-6
+        {/* Charecters */}
+        <Link
+          href={`/world/${data?.id}/characters`}
+          className="p-6
               rounded-md
           bg-card-sidebar-bg 
           hover:bg-interactive-hover-bg transition-all
           border border-gold-border-dim
           flex flex-col gap-2 group cursor-pointer
         "
-            >
-              <p className="font-cinzel text-gold-accent-primary text-[14px] tracking-widest group-hover:text-white">
-                {item?.label}
-              </p>
+        >
+          <p className="font-cinzel text-gold-accent-primary text-[14px] tracking-widest group-hover:text-white">
+            CHARACTERS
+          </p>
 
-              <p className="font-mono text-text-metadata-muted text-[12px] uppercase">
-                {item?.value}
-              </p>
-            </Link>
-          );
-        })}
+          <p className="font-mono text-text-metadata-muted text-[12px] uppercase">
+            {`${data?.characters?.length} entries . /characters`}
+          </p>
+        </Link>
+
+        {/* Places */}
+        <Link
+          href={'#'}
+          className="p-6
+              rounded-md
+          bg-card-sidebar-bg 
+          hover:bg-interactive-hover-bg transition-all
+          border border-gold-border-dim
+          flex flex-col gap-2 group cursor-pointer
+        "
+        >
+          <p className="font-cinzel text-gold-accent-primary text-[14px] tracking-widest group-hover:text-white">
+            PLACES
+          </p>
+
+          <p className="font-mono text-text-metadata-muted text-[12px] uppercase">
+            {`${data?.places?.length} entries . /places`}
+          </p>
+        </Link>
+
+        {/* Timeline */}
+        <Link
+          href={`#`}
+          className="p-6
+              rounded-md
+          bg-card-sidebar-bg 
+          hover:bg-interactive-hover-bg transition-all
+          border border-gold-border-dim
+          flex flex-col gap-2 group cursor-pointer
+        "
+        >
+          <p className="font-cinzel text-gold-accent-primary text-[14px] tracking-widest group-hover:text-white">
+            TIMELINE
+          </p>
+
+          <p className="font-mono text-text-metadata-muted text-[12px] uppercase">
+            {`${data?.timeline.length} events . /timeline`}
+          </p>
+        </Link>
+
+        {/* Faction */}
+        <Link
+          href={'#'}
+          className="p-6
+              rounded-md
+          bg-card-sidebar-bg 
+          hover:bg-interactive-hover-bg transition-all
+          border border-gold-border-dim
+          flex flex-col gap-2 group cursor-pointer
+        "
+        >
+          <p className="font-cinzel text-gold-accent-primary text-[14px] tracking-widest group-hover:text-white">
+            FACTION
+          </p>
+
+          <p className="font-mono text-text-metadata-muted text-[12px] uppercase">
+            {`${0} entries . /factions`}
+          </p>
+        </Link>
       </div>
     </div>
   );
