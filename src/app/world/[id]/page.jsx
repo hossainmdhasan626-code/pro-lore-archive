@@ -147,7 +147,7 @@ const page = async ({ params }) => {
 
         {/* Places */}
         <Link
-          href={'#'}
+          href={`/world/${data?.id}/places`}
           className="p-6
               rounded-md
           bg-card-sidebar-bg 

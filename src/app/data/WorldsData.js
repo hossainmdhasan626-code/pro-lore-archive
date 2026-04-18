@@ -101,6 +101,10 @@ export const worldsData = [
     places: [
       { id: "p1", name: "VETHARA PRIME", type: "City", subtype: "Capital", icon: "hexagon" },
       { id: "p2", name: "WHISPERING FALLS", type: "Natural", subtype: "Sanctuary", icon: "droplet" },
+          { id: "p3", name: "WHISPERING FALLS", type: "Natural", subtype: "Sanctuary", icon: "droplet" },
+      { id: "p4", name: "WHISPERING FALLS", type: "Natural", subtype: "Sanctuary", icon: "droplet" },
+      { id: "p5", name: "WHISPERING FALLS", type: "Natural", subtype: "Sanctuary", icon: "droplet" },
+
     ],
     timeline: [
       { year: "Yr 1", category: "ARCANE", title: "THE FIRST WEAVING", desc: "The Aetheric network is established." },

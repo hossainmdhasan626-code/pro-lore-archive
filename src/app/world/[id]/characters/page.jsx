@@ -1,5 +1,7 @@
 // This page was the character daynamic page .
 
+"use server";
+import Header_search_filtaring from "@/app/components/reusable_component/Header_search_filtaring";
 import { worldsData } from "@/app/data/WorldsData";
 import Link from "next/link";
 import React from "react";
@@ -11,41 +13,19 @@ const page = async ({ params }) => {
   //  Now extract character details . By useing id which was come by params .
   const data = worldsData?.find((item) => item?.id === id);
 
+  const filtar_arrow = [
+    { id: 1, value: "all", label: "All" },
+    { id: 2, value: "hero", label: "Hero" },
+    { id: 3, value: "villain", label: "Villain" },
+    { id: 4, value: "npc", label: "NPC" },
+  ];
   return (
     <div>
       {/* Header */}
-      <div
-        className=" w-full 
-    px-3 py-6
-    border border-gold-border-dim
-    flex justify-between"
-      >
-        {/* Header text */}
-        <div className="font-cinzel tracking-[0.2em] text-text-metadata-muted">
-          CHARACTERS
-        </div>
-
-        {/* Search bar */}
-        <div className="w-72">
-          <input
-            type="text"
-            placeholder="Search characters..."
-            className="
-      w-full px-4 py-2.5
-      bg-interactive-hover-bg [cite: 38, 59]
-      font-crimson 
-      text-text-heading-primary [cite: 42, 63, 143]
-      text-[14px] [cite: 143]
-      placeholder:text-text-metadata-muted [cite: 42, 65]  
-      border border-gold-border-dim 
-      rounded-[3px]  
-      focus:outline-none 
-      focus:border-gold-accent-primary 
-      transition-all duration-300
-    "
-          />
-        </div>
-      </div>
+      <Header_search_filtaring
+        header_contant={"CHARACTERRS"}
+        filtar_item={filtar_arrow}
+      />
 
       {/* Main section */}
       {/* Main section in world/[id]/characters/page.js */}
