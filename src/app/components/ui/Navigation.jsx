@@ -37,7 +37,7 @@ const Navigation = () => {
           hover:bg-interactive-hover-bg
           hover:border-nav-hover-border
           border border-transparent rounded-sm 
-          transition-all duration-300 ease-in-out
+          transition-all duration-500 ease-in-out
         "
             >
               {item?.label}
