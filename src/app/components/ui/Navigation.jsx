@@ -1,32 +1,16 @@
 // This component was the header navigation section
 
-"use client";
+// "use client";
 
 import React, { useContext } from "react";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/app/data/Navigation_data";
-import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
+// import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
 import { worldsData } from "@/app/data/WorldsData";
+import Extract_Navigation_context from "../custom/Sidebar_navigation";
+import Sidebar_navigation from "../custom/Sidebar_navigation";
 
 const Navigation = () => {
-  // Extract data form Navigation_context
-  const { path } = useContext(Navigation_context);
-
-  // Extract the world data .
-  const world_data = worldsData?.find((item) => item?.id === path?.world_id);
-
-  // Navbar items .
-  const data = NAV_ITEMS;
-
-  const Nav_path = {
-    Overview: "/",
-    Characters: `/world/${world_data?.id}/characters`,
-    Places: `/world/${world_data?.id}/places`,
-    Timeline: `/world/${world_data?.id}/timeline`,
-  };
-
-  console.log("Current context data:", path)
-
   return (
     <div
       className="w-[95%] h-auto
@@ -45,28 +29,10 @@ const Navigation = () => {
       <div className="flex flex-col gap-1">
         {/* Do a map() on NAV_ITEMS */}
         {NAV_ITEMS?.map((item) => {
-          return (
-            <Link
-              key={item?.id}
-              href={Nav_path[item?.label]}
-              className="
-          group flex items-center justify-between
-          px-5 py-3 
-          font-crimson tracking-[0.12em] text-text-body-secondary 
-          hover:text-text-heading-primary
-          hover:bg-interactive-hover-bg
-          hover:border-nav-hover-border
-          border border-transparent rounded-sm 
-          transition-all duration-500 ease-in-out
-        "
-            >
-              {item?.label}
-            </Link>
-          );
+          return <Sidebar_navigation key={item?.id} label={item?.label} />;
         })}
       </div>
     </div>
-
   );
 };
 
