@@ -1,13 +1,6 @@
 // This component was the header navigation section
 
-// "use client";
-
-import React, { useContext } from "react";
-import Link from "next/link";
 import { NAV_ITEMS } from "@/app/data/Navigation_data";
-// import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
-import { worldsData } from "@/app/data/WorldsData";
-import Extract_Navigation_context from "../custom/Sidebar_navigation";
 import Sidebar_navigation from "../custom/Sidebar_navigation";
 
 const Navigation = () => {

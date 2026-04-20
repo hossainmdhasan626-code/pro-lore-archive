@@ -1,14 +1,7 @@
-"use client";
-
-import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
 import { worldsData } from "@/app/data/WorldsData";
-import Link from "next/link";
-import React, { useContext } from "react";
+import Overview_cart_navigation from "../custom/Overview_cart_navigation";
 
 const Main_containt_overview = () => {
-  // Set the selected world details on the context
-  const { worldSelected } = useContext(Navigation_context);
-
   /* NOTE: Originally I implemented data fetching via Custom API (SSR/ISR).
      Due to build-time restrictions (ECONNREFUSED) on static hosting, 
      I am currently using direct data injection for SSG performance.
@@ -32,18 +25,10 @@ const Main_containt_overview = () => {
               : "border-t-status-danger-red";
 
         return (
-          <Link
-            href={`world/${item?.id}`}
-            onClick={() =>
-              worldSelected({
-                world_id: item?.id,
-                is_selected: true,
-              })
-            }
+          <Overview_cart_navigation
             key={item?.id}
-            className={`w-full h-70 flex flex-col justify-between
-          p-6 bg-card-sidebar-bg hover:bg-interactive-hover-bg transition-all
-          border border-gold-border-dim border-t-2 ${topBorderColor} group cursor-pointer`}
+            id={item?.id}
+            topBorderColor={topBorderColor}
           >
             <div>
               {/* Tags */}
@@ -89,7 +74,7 @@ const Main_containt_overview = () => {
                 </p>
               </div>
             </div>
-          </Link>
+          </Overview_cart_navigation>
         );
       })}
     </div>
