@@ -1,8 +1,14 @@
+"use client";
+
+import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
 import { worldsData } from "@/app/data/WorldsData";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 
-const Main_containt_overview = async () => {
+const Main_containt_overview = () => {
+  // Set the selected world details on the context
+  const { worldSelected } = useContext(Navigation_context);
+
   /* NOTE: Originally I implemented data fetching via Custom API (SSR/ISR).
      Due to build-time restrictions (ECONNREFUSED) on static hosting, 
      I am currently using direct data injection for SSG performance.
@@ -27,7 +33,13 @@ const Main_containt_overview = async () => {
 
         return (
           <Link
-          href={`world/${item?.id}`}
+            href={`world/${item?.id}`}
+            onClick={() =>
+              worldSelected({
+                world_id: item?.id,
+                is_selected: true,
+              })
+            }
             key={item?.id}
             className={`w-full h-70 flex flex-col justify-between
           p-6 bg-card-sidebar-bg hover:bg-interactive-hover-bg transition-all

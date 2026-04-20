@@ -1,11 +1,31 @@
 // This component was the header navigation section
 
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/app/data/Navigation_data";
+import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
+import { worldsData } from "@/app/data/WorldsData";
 
 const Navigation = () => {
+  // Extract data form Navigation_context
+  const { path } = useContext(Navigation_context);
+
+  // Extract the world data .
+  const world_data = worldsData?.find((item) => item?.id === path?.world_id);
+
+  // Navbar items .
   const data = NAV_ITEMS;
+
+  const Nav_path = {
+    Overview: "/",
+    Characters: `/world/${world_data?.id}/characters`,
+    Places: `/world/${world_data?.id}/places`,
+    Timeline: `/world/${world_data?.id}/timeline`,
+  };
+
+  console.log("Current context data:", path)
 
   return (
     <div
@@ -28,7 +48,7 @@ const Navigation = () => {
           return (
             <Link
               key={item?.id}
-              href={item?.path}
+              href={Nav_path[item?.label]}
               className="
           group flex items-center justify-between
           px-5 py-3 
@@ -46,6 +66,7 @@ const Navigation = () => {
         })}
       </div>
     </div>
+
   );
 };
 
