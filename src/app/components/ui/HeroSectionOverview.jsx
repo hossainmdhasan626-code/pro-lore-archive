@@ -1,43 +1,42 @@
-// Thise page was the hero section of the overview page .
+// This page was the hero section of the overview page .
 
 import { worldsData } from "@/app/data/WorldsData";
-import React from "react";
 
-const Hero_section_overview = () => {
+const HeroSectionOverview = () => {
   // Data collect form main data .
-  const world_data = worldsData;
+  const worldData = worldsData;
 
   // Write a fun() which work was sum the total characters are added .
-  // const total_characters = () => {
+  // const totalCharacters = () => {
   //   // Create a blank variable
-  //   let total_cha = 0;
+  //   let totalCha = 0;
 
   //   // Do a for loop for extract total characters .
-  //   for (let index = 0; index < world_data.length; index++) {
+  //   for (let index = 0; index < worldData.length; index++) {
   //     // Count the length of the characters arrow .
-  //     const count = world_data[index]?.characters?.length;
-  //     // Add count to total_cha .
-  //     total_cha += count;
+  //     const count = worldData[index]?.characters?.length;
+  //     // Add count to totalCha .
+  //     totalCha += count;
   //   }
-  //   // Return the total_Cha .
-  //   return total_cha;
+  //   // Return the totalCha .
+  //   return totalCha;
   // };
 
   // Extract total characters
-  const total_cha = world_data?.reduce((acc,world ) => {
-    return acc + world?.characters?.length;
-  },0);
+  const totalCha = worldData?.reduce((acc, world) => {
+    return acc + (world?.characters?.length || 0);
+  }, 0);
 
   // Custom arrow for count section
   const data = [
     {
       id: 1,
-      count: world_data?.length,
+      count: worldData?.length,
       label: "Worlds", // font-mono, text-text-metadata-muted
     },
     {
       id: 2,
-      count: total_cha,
+      count: totalCha,
       label: "CHARACTERS", // font-mono, text-text-metadata-muted
     },
   ];
@@ -105,4 +104,4 @@ const Hero_section_overview = () => {
   );
 };
 
-export default Hero_section_overview;
+export default HeroSectionOverview;

@@ -1,9 +1,8 @@
 // It's was a daynamic page for world overview .
 
-import EmptyState from "@/app/components/ui/EmptyState";
+import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
 import { worldsData } from "@/app/data/WorldsData";
 import Link from "next/link";
-import React, { lazy } from "react";
 
 const page = async ({ params }) => {
   // Collect the world id form params .
@@ -13,7 +12,7 @@ const page = async ({ params }) => {
   const data = worldsData.find((item) => item?.id === id);
 
   // Create a custom arrow with the data for world section
-  const world_details = [
+  const worldDetails = [
     {
       id: 1,
       label: "Gener",
@@ -46,18 +45,8 @@ const page = async ({ params }) => {
     },
   ];
 
-  // If no characters, timelines, or heroes have been recorded in this world thane
-  // the EmptyState will be rendar .",
-  if (
-    (data?.characters?.length &&
-      data?.places?.length &&
-      data?.timeline.length) === 0
-  ) {
-    return <EmptyState type="no-data" />;
-  }
-
   return (
-    <div>
+    <DataGuard data={data}>
       {/* Header */}
       <div
         className=" w-full 
@@ -102,7 +91,7 @@ const page = async ({ params }) => {
         border border-gold-border-dim
         "
         >
-          {world_details.map((items) => {
+          {worldDetails.map((items) => {
             return (
               <div key={items?.id}>
                 <div
@@ -214,7 +203,7 @@ const page = async ({ params }) => {
           </p>
         </Link>
       </div>
-    </div>
+    </DataGuard>
   );
 };
 

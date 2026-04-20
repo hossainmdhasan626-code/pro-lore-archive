@@ -1,29 +1,29 @@
-// 
+//
 
 "use client";
 
 import { useContext } from "react";
 import Link from "next/link";
-import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
+import { NavigationContext } from "@/app/context/creatContext/NavigationContext";
 import EmptyState from "../EmptyState";
 
-const Sidebar_navigation = ({ label }) => {
-  const { path } = useContext(Navigation_context);
+const SidebarNavigation = ({ label }) => {
+  const { path } = useContext(NavigationContext);
 
-  const Nav_path = {
+  const navPath = {
     Overview: "/",
-    Characters: path?.world_id ? `/world/${path.world_id}/characters` : "#",
-    Places: path?.world_id ? `/world/${path.world_id}/places` : "#",
-    Timeline: path?.world_id ? `/world/${path.world_id}/timeline` : "#",
+    Characters: path?.worldId ? `/world/${path.worldId}/characters` : "#",
+    Places: path?.worldId ? `/world/${path.worldId}/places` : "#",
+    Timeline: path?.worldId ? `/world/${path.worldId}/timeline` : "#",
   };
 
- if (!path.is_selected) {
-  return <EmptyState type="no-world" />;
-}
+  if (!path.isSelected) {
+    return <EmptyState type="no-world" />;
+  }
 
   return (
     <Link
-      href={Nav_path[label] || "#"}
+      href={navPath[label] || "#"}
       className="
           group flex items-center justify-between
           px-5 py-3 
@@ -40,4 +40,4 @@ const Sidebar_navigation = ({ label }) => {
   );
 };
 
-export default Sidebar_navigation;
+export default SidebarNavigation;

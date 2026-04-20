@@ -1,13 +1,13 @@
 "use client";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
-const Filter = ({filtar_item}) => {
+const Filter = ({filtarItem}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   //   To add to the URL of whatever the user select for
-  const handleFilter = (role, filtar_item) => {
+  const handleFilter = (role, filtarItem) => {
     const params = new URLSearchParams(searchParams);
 
     if (role) {
@@ -18,7 +18,7 @@ const Filter = ({filtar_item}) => {
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const filter_arrow = filtar_item;
+  const filterArrow = filtarItem;
 
   return (
     <select
@@ -34,7 +34,7 @@ const Filter = ({filtar_item}) => {
     
   "
     >
-      {filtar_item?.map((item) => {
+      {filtarItem?.map((item) => {
         return (
           <option
             key={item?.id}

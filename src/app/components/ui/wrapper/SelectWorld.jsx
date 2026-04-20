@@ -2,18 +2,18 @@
 
 "use client";
 
-import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
+import { NavigationContext } from "@/app/context/creatContext/NavigationContext";
 import React, { useContext } from "react";
 import EmptyState from "../EmptyState";
 
-const Select_world = ({ children }) => {
-  const { path } = useContext(Navigation_context);
+const SelectWorld = ({ children }) => {
+  const { path } = useContext(NavigationContext);
 
-  if (!path.is_selected) {
+  if (!path.isSelected) {
     return <EmptyState type="no-world" />;
   }
 
   return <>{children}</>;
 };
 
-export default Select_world;
+export default SelectWorld;

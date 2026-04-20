@@ -1,19 +1,19 @@
 "use client";
 
-import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
+import { NavigationContext } from "@/app/context/creatContext/NavigationContext";
 import Link from "next/link";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
-const Overview_cart_navigation = ({ children, topBorderColor, id }) => {
-  const { worldSelected } = useContext(Navigation_context);
+const OverviewCartNavigation = ({ children, topBorderColor, id }) => {
+  const { worldSelected } = useContext(NavigationContext);
 
   return (
     <Link
       href={`world/${id}`}
       onClick={() =>
         worldSelected({
-          world_id: id,
-          is_selected: true,
+          worldId: id,
+          isSelected: true,
         })
       }
       className={`w-full h-70 flex flex-col justify-between
@@ -25,4 +25,4 @@ const Overview_cart_navigation = ({ children, topBorderColor, id }) => {
   );
 };
 
-export default Overview_cart_navigation;
+export default OverviewCartNavigation;

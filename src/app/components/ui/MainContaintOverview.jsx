@@ -1,7 +1,9 @@
-import { worldsData } from "@/app/data/WorldsData";
-import Overview_cart_navigation from "./wrapper/Overview_cart_navigation";
+// Lnaging page main content are render form this component .
 
-const Main_containt_overview = () => {
+import { worldsData } from "@/app/data/WorldsData";
+import OverviewCartNavigation from "./wrapper/OverviewCartNavigation";
+
+const MainContaintOverview = () => {
   /* NOTE: Originally I implemented data fetching via Custom API (SSR/ISR).
      Due to build-time restrictions (ECONNREFUSED) on static hosting, 
      I am currently using direct data injection for SSG performance.
@@ -25,7 +27,7 @@ const Main_containt_overview = () => {
               : "border-t-status-danger-red";
 
         return (
-          <Overview_cart_navigation
+          <OverviewCartNavigation
             key={item?.id}
             id={item?.id}
             topBorderColor={topBorderColor}
@@ -74,11 +76,11 @@ const Main_containt_overview = () => {
                 </p>
               </div>
             </div>
-          </Overview_cart_navigation>
+          </OverviewCartNavigation>
         );
       })}
     </div>
   );
 };
 
-export default Main_containt_overview;
+export default MainContaintOverview;

@@ -1,20 +1,20 @@
-// Thise page work was rendar the full description of a charecter . 
+// Thise page work was rendar the full description of a charecter .
 
+import EmptyState from "@/app/components/ui/EmptyState";
 import { worldsData } from "@/app/data/WorldsData";
-import React from "react";
 
 const page = async ({ params }) => {
   // Extract id
-  const { id, cha_id } = await params;
+  const { id, chaId } = await params;
 
   // Extract world data first
-  const world_data = worldsData?.find((item) => item?.id === id);
+  const worldData = worldsData?.find((item) => item?.id === id);
 
   // Now extract this particular charecter details/data
-  const data = world_data?.characters.find((item) => item?.id === cha_id);
+  const data = worldData?.characters.find((item) => item?.id === chaId);
 
   // Create a custom arrow for Charecter details table
-  const cha_details_table = [
+  const chaDetailsTable = [
     {
       id: 1,
       label: "Age",
@@ -37,12 +37,13 @@ const page = async ({ params }) => {
     },
   ];
 
+  console.log("charecter id :", chaId);
+  console.log("wrold id :", id);
+
   // If the charecter was not found
   if (!data)
     return (
-      <p className="text-[42px] text-red-600 font-bold">
-        Charecter details was not found
-      </p>
+     <EmptyState type="no-character"/>
     );
 
   return (
@@ -85,7 +86,7 @@ const page = async ({ params }) => {
             </span>
           </div>
 
-          {/* Thise div rapper was the rapper for the character details text . */}
+          {/* Thise div rapper was the wrapper for the character details text . */}
           <div className="flex flex-col gap-4">
             {/* Name and other details */}
             <div className="text-white text-[32px] font-crimson">
@@ -103,7 +104,7 @@ const page = async ({ params }) => {
             {/* Short description */}
             <div
               className="text-[18px] font-crimson text-text-body-secondary italic"
-              dangerouslySetInnerHTML={{ __html: data?.shortDesc }}
+              dangerouslySetInnerHTML={{ __html: data?.shortDesc || "" }}
             />
 
             {/* Tags */}
@@ -136,7 +137,7 @@ const page = async ({ params }) => {
                 border border-gold-accent-primary
                 bg-black/30"
               >
-                {world_data?.name}
+                {worldData?.name}
               </span>
               {/* Era */}
               <span
@@ -145,7 +146,7 @@ const page = async ({ params }) => {
                 border border-gold-accent-primary
                 bg-black/30"
               >
-                {world_data?.details?.era}
+                {worldData?.details?.era}
               </span>
             </div>
           </div>
@@ -159,7 +160,7 @@ const page = async ({ params }) => {
         border border-gold-border-dim
         "
         >
-          {cha_details_table?.map((items) => {
+          {chaDetailsTable?.map((items) => {
             return (
               <div key={items?.id}>
                 <div
@@ -172,8 +173,10 @@ const page = async ({ params }) => {
                   </div>
 
                   {/* value */}
-                  <div className="
-                  text-sm font-cinzel text-white">
+                  <div
+                    className="
+                  text-sm font-cinzel text-white"
+                  >
                     {items?.value}
                   </div>
                 </div>
@@ -198,7 +201,7 @@ const page = async ({ params }) => {
         {/* Character description on  text */}
         <div
           className="w-4/5"
-          dangerouslySetInnerHTML={{ __html: data?.fullDesc }}
+          dangerouslySetInnerHTML={{ __html: data?.fullDesc || ""}}
         />
 
         {/* Character relation and appears in other character and world list 
@@ -269,7 +272,7 @@ const page = async ({ params }) => {
           <div>
             {/* Table title */}
             <p className="font-crimson text-[18px] text-gold-accent-primary">
-              APPEARS IN 
+              APPEARS IN
             </p>
 
             {/* A horizontal line */}
@@ -299,10 +302,8 @@ const page = async ({ params }) => {
                       className="flex 
                     font-mono text-[12px] text-text-metadata-muted tracking-widest"
                     >
-                     {/* Subtitle */}
-                     <p>
-                      {item?.subtitle}
-                     </p>
+                      {/* Subtitle */}
+                      <p>{item?.subtitle}</p>
                     </div>
                   </div>
                 </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 
-const New_entry_sidebar = () => {
+const NewEntrySidebar = () => {
   return (
     <div
       className="w-full 
@@ -35,4 +35,4 @@ const New_entry_sidebar = () => {
   );
 };
 
-export default New_entry_sidebar;
+export default NewEntrySidebar;

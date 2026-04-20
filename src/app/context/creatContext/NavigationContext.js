@@ -4,4 +4,4 @@
 
 import { createContext } from "react";
 
-export const Navigation_context = createContext(null);
+export const NavigationContext = createContext(null);

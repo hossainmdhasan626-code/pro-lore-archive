@@ -1,44 +1,33 @@
 // This page was daynamic page for places .
 
-import EmptyState from "@/app/components/ui/EmptyState";
-import Header_search_filtaring from "@/app/components/ui/reusable_component/Header_search_filtaring";
+import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
+import HeaderSearchFiltaring from "@/app/components/ui/reusable-component/HeaderSearchFiltaring";
 import { worldsData } from "@/app/data/WorldsData";
-import React from "react";
 
 const page = async ({ params }) => {
   // Extract world id and place id form params .
   const { id } = await params;
 
   // Extract the world data using id
-  const world_data = worldsData?.find((item) => item?.id === id);
+  const worldData = worldsData?.find((item) => item?.id === id);
 
-  // Extract the places arrow form world_data
-  const places = world_data?.places;
+  // Extract the places arrow form worldData
+  const places = worldData?.places;
 
   //   Filtar arror
-  const filtar_arrow = [
+  const filtarArrow = [
     { id: 1, label: "All", value: "all" },
     { id: 2, label: "City", value: "city" },
     { id: 3, label: "Ruin", value: "ruin" },
     { id: 4, label: "Wilderness", value: "Wilderness" },
   ];
 
-  // If no characters, timelines, or heroes have been recorded in this world thane
-  // the EmptyState will be rendar .",
-  if (
-    (world_data?.characters?.length &&
-      world_data?.places?.length &&
-      world_data?.timeline.length) === 0
-  ) {
-    return <EmptyState type="no-data" />;
-  }
-
   return (
-    <div>
+    <DataGuard data={worldData}>
       {/* Header */}
-      <Header_search_filtaring
-        header_contant={"PLACES"}
-        filtar_item={filtar_arrow}
+      <HeaderSearchFiltaring
+        headerContant={"PLACES"}
+        filtarItem={filtarArrow}
       />
 
       {/* Main content */}
@@ -81,7 +70,7 @@ const page = async ({ params }) => {
           );
         })}
       </div>
-    </div>
+    </DataGuard>
   );
 };
 

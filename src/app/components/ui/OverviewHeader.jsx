@@ -1,8 +1,6 @@
 // Thise  component was the overview page header with a search bar
 
-import React from "react";
-
-const Overview_Header = () => {
+const OverviewHeader = () => {
   return (
     <div
       className=" w-full 
@@ -22,11 +20,11 @@ const Overview_Header = () => {
           placeholder="Search characters..."
           className="
       w-full px-4 py-2.5
-      bg-interactive-hover-bg [cite: 38, 59]
+      bg-interactive-hover-bg 
       font-crimson 
-      text-text-heading-primary [cite: 42, 63, 143]
-      text-[14px] [cite: 143]
-      placeholder:text-text-metadata-muted [cite: 42, 65]  
+      text-text-heading-primary 
+      text-[14px]
+      placeholder:text-text-metadata-muted 
       border border-gold-border-dim 
       rounded-[3px]  
       focus:outline-none 
@@ -39,4 +37,4 @@ const Overview_Header = () => {
   );
 };
 
-export default Overview_Header;
+export default OverviewHeader;
