@@ -1,7 +1,8 @@
 // This page was the character daynamic page .
 
 "use server";
-import Header_search_filtaring from "@/app/components/reusable_component/Header_search_filtaring";
+import EmptyState from "@/app/components/ui/EmptyState";
+import Header_search_filtaring from "@/app/components/ui/reusable_component/Header_search_filtaring";
 import { worldsData } from "@/app/data/WorldsData";
 import Link from "next/link";
 import React from "react";
@@ -19,6 +20,16 @@ const page = async ({ params }) => {
     { id: 3, value: "villain", label: "Villain" },
     { id: 4, value: "npc", label: "NPC" },
   ];
+
+  // If no characters, timelines, or heroes have been recorded in this world thane
+  // the EmptyState will be rendar .",
+  if (
+    (data?.characters?.length &&
+      data?.places?.length &&
+      data?.timeline.length) === 0
+  ) {
+    return <EmptyState type="no-data" />;
+  }
   return (
     <div>
       {/* Header */}

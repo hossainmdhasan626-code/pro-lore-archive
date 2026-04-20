@@ -1,7 +1,8 @@
 // This component was the header navigation section
 
 import { NAV_ITEMS } from "@/app/data/Navigation_data";
-import Sidebar_navigation from "../custom/Sidebar_navigation";
+import Sidebar_navigation from "./wrapper/Sidebar_navigation";
+import Select_world from "./wrapper/Select_world";
 
 const Navigation = () => {
   return (
@@ -18,13 +19,15 @@ const Navigation = () => {
         NAVIGATE
       </p>
 
-      {/* A div rapper for rendar the navigation */}
-      <div className="flex flex-col gap-1">
-        {/* Do a map() on NAV_ITEMS */}
-        {NAV_ITEMS?.map((item) => {
-          return <Sidebar_navigation key={item?.id} label={item?.label} />;
-        })}
-      </div>
+      <Select_world>
+        {/* A div rapper for rendar the navigation */}
+        <div className="flex flex-col gap-1">
+          {/* Do a map() on NAV_ITEMS */}
+          {NAV_ITEMS?.map((item) => {
+            return <Sidebar_navigation key={item?.id} label={item?.label} />;
+          })}
+        </div>
+      </Select_world>
     </div>
   );
 };

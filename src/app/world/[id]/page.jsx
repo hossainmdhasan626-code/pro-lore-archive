@@ -1,6 +1,6 @@
 // It's was a daynamic page for world overview .
 
-
+import EmptyState from "@/app/components/ui/EmptyState";
 import { worldsData } from "@/app/data/WorldsData";
 import Link from "next/link";
 import React, { lazy } from "react";
@@ -9,7 +9,6 @@ const page = async ({ params }) => {
   // Collect the world id form params .
   const { id } = await params;
 
-  
   // Fine this particular world data by useing id .
   const data = worldsData.find((item) => item?.id === id);
 
@@ -46,6 +45,16 @@ const page = async ({ params }) => {
       value: data?.timeline?.length,
     },
   ];
+
+  // If no characters, timelines, or heroes have been recorded in this world thane
+  // the EmptyState will be rendar .",
+  if (
+    (data?.characters?.length &&
+      data?.places?.length &&
+      data?.timeline.length) === 0
+  ) {
+    return <EmptyState type="no-data" />;
+  }
 
   return (
     <div>
@@ -167,7 +176,7 @@ const page = async ({ params }) => {
 
         {/* Timeline */}
         <Link
-          href={`#`}
+          href={`/world/${data?.id}/timeline`}
           className="p-6
               rounded-md
           bg-card-sidebar-bg 
@@ -187,7 +196,7 @@ const page = async ({ params }) => {
 
         {/* Faction */}
         <Link
-          href={'#'}
+          href={"#"}
           className="p-6
               rounded-md
           bg-card-sidebar-bg 

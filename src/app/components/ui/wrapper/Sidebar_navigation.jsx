@@ -1,9 +1,11 @@
-// src/app/components/ui/NavLinks.jsx
+// 
+
 "use client";
 
 import { useContext } from "react";
 import Link from "next/link";
 import { Navigation_context } from "@/app/context/creat_context/Navigation_context";
+import EmptyState from "../EmptyState";
 
 const Sidebar_navigation = ({ label }) => {
   const { path } = useContext(Navigation_context);
@@ -14,6 +16,10 @@ const Sidebar_navigation = ({ label }) => {
     Places: path?.world_id ? `/world/${path.world_id}/places` : "#",
     Timeline: path?.world_id ? `/world/${path.world_id}/timeline` : "#",
   };
+
+ if (!path.is_selected) {
+  return <EmptyState type="no-world" />;
+}
 
   return (
     <Link
