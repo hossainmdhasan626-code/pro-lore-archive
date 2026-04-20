@@ -14,7 +14,7 @@ const New_entry_sidebar = () => {
       <div
         className="w-[95%]
         mx-auto py-3
-        text-[11px] tracking-[0.12em] font-cinzel text-gold-accent-primary hover:text-gold-accent-hover
+        text-[11px] tracking-widest font-cinzel text-gold-accent-primary hover:text-gold-accent-hover
         bg-card-sidebar-bg hover:bg-interactive-hover-bg
         border border-gold-border-dim hover:border-gold-accent-primary rounded-[3px]
         transition-all duration-300 cursor-pointer uppercase tracking-widest"

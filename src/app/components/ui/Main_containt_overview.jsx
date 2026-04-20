@@ -1,8 +1,7 @@
 import { worldsData } from "@/app/data/WorldsData";
-import Link from "next/link";
-import React from "react";
+import Overview_cart_navigation from "./wrapper/Overview_cart_navigation";
 
-const Main_containt_overview = async () => {
+const Main_containt_overview = () => {
   /* NOTE: Originally I implemented data fetching via Custom API (SSR/ISR).
      Due to build-time restrictions (ECONNREFUSED) on static hosting, 
      I am currently using direct data injection for SSG performance.
@@ -26,12 +25,10 @@ const Main_containt_overview = async () => {
               : "border-t-status-danger-red";
 
         return (
-          <Link
-          href={`world/${item?.id}`}
+          <Overview_cart_navigation
             key={item?.id}
-            className={`w-full h-70 flex flex-col justify-between
-          p-6 bg-card-sidebar-bg hover:bg-interactive-hover-bg transition-all
-          border border-gold-border-dim border-t-2 ${topBorderColor} group cursor-pointer`}
+            id={item?.id}
+            topBorderColor={topBorderColor}
           >
             <div>
               {/* Tags */}
@@ -77,7 +74,7 @@ const Main_containt_overview = async () => {
                 </p>
               </div>
             </div>
-          </Link>
+          </Overview_cart_navigation>
         );
       })}
     </div>

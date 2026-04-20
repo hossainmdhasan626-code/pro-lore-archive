@@ -1,12 +1,10 @@
 // This component was the header navigation section
 
-import React from "react";
-import Link from "next/link";
 import { NAV_ITEMS } from "@/app/data/Navigation_data";
+import Sidebar_navigation from "./wrapper/Sidebar_navigation";
+import Select_world from "./wrapper/Select_world";
 
 const Navigation = () => {
-  const data = NAV_ITEMS;
-
   return (
     <div
       className="w-[95%] h-auto
@@ -21,30 +19,15 @@ const Navigation = () => {
         NAVIGATE
       </p>
 
-      {/* A div rapper for rendar the navigation */}
-      <div className="flex flex-col gap-1">
-        {/* Do a map() on NAV_ITEMS */}
-        {NAV_ITEMS?.map((item) => {
-          return (
-            <Link
-              key={item?.id}
-              href={item?.path}
-              className="
-          group flex items-center justify-between
-          px-5 py-3 
-          font-crimson tracking-[0.12em] text-text-body-secondary 
-          hover:text-text-heading-primary
-          hover:bg-interactive-hover-bg
-          hover:border-nav-hover-border
-          border border-transparent rounded-sm 
-          transition-all duration-500 ease-in-out
-        "
-            >
-              {item?.label}
-            </Link>
-          );
-        })}
-      </div>
+      <Select_world>
+        {/* A div rapper for rendar the navigation */}
+        <div className="flex flex-col gap-1">
+          {/* Do a map() on NAV_ITEMS */}
+          {NAV_ITEMS?.map((item) => {
+            return <Sidebar_navigation key={item?.id} label={item?.label} />;
+          })}
+        </div>
+      </Select_world>
     </div>
   );
 };

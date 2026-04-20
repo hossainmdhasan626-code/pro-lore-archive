@@ -1,6 +1,7 @@
 // This page was daynamic page for places .
 
-import Header_search_filtaring from "@/app/components/reusable_component/Header_search_filtaring";
+import EmptyState from "@/app/components/ui/EmptyState";
+import Header_search_filtaring from "@/app/components/ui/reusable_component/Header_search_filtaring";
 import { worldsData } from "@/app/data/WorldsData";
 import React from "react";
 
@@ -21,6 +22,16 @@ const page = async ({ params }) => {
     { id: 3, label: "Ruin", value: "ruin" },
     { id: 4, label: "Wilderness", value: "Wilderness" },
   ];
+
+  // If no characters, timelines, or heroes have been recorded in this world thane
+  // the EmptyState will be rendar .",
+  if (
+    (world_data?.characters?.length &&
+      world_data?.places?.length &&
+      world_data?.timeline.length) === 0
+  ) {
+    return <EmptyState type="no-data" />;
+  }
 
   return (
     <div>
@@ -46,8 +57,10 @@ const page = async ({ params }) => {
                     But now i just rendar a card with details  */}
 
               {/* City detail */}
-              <div className="flex 
-              font-mono tracking-[0.2em] text-text-metadata-muted text-[16px]">
+              <div
+                className="flex 
+              font-mono tracking-[0.2em] text-text-metadata-muted text-[16px]"
+              >
                 {/* City type */}
                 <p>{itme?.type}</p>
                 <p className="px-3">.</p>
