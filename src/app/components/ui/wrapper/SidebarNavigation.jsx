@@ -25,9 +25,12 @@ const SidebarNavigation = ({ label, activePath }) => {
 
   let isActive = false;
 
+  // Toggle isActive fot highlite the navigation in sidebar .
   if (activePath === "/") {
+    // If current pathe was really home/"/" or not . If it was than toggle .
     isActive = pathName === "/";
   } else {
+    // If activePath was in current path than toggle isActive .
     isActive = pathName.includes(activePath);
   }
 

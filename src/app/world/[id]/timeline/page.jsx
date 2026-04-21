@@ -2,6 +2,7 @@
 
 import TimelineEvent from "@/app/components/ui/TimelineEvent";
 import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
+import HeaderSearchFiltaring from "@/app/components/ui/reusable-component/HeaderSearchFiltaring";
 import { getWorldData } from "@/app/utils/dataQuery";
 
 const page = async ({ params }) => {
@@ -14,21 +15,38 @@ const page = async ({ params }) => {
   // Extract the timeline_data
   const data = worldData?.timeline;
 
+  // Filtar item
+  const filtarItem = [
+    {
+      id: 0,
+      label: "All",
+      value: "all",
+    },
+    {
+      id: 1,
+      label: "War",
+      value: "war",
+    },
+    {
+      id: 2,
+      label: "Political",
+      value: "political",
+    },
+    {
+      id: 3,
+      label: "Arcane",
+      value: "arcane",
+    },
+  ];
+
   return (
     <DataGuard data={worldData}>
       <div>
         {/* Header */}
-        <div
-          className=" w-full 
-    px-3 py-6
-    border border-gold-border-dim
-    flex justify-between"
-        >
-          {/* Header text */}
-          <div className="font-cinzel tracking-[0.2em] text-text-metadata-muted">
-            All WORLD
-          </div>
-        </div>
+        <HeaderSearchFiltaring
+          headerContant={"Timeline"}
+          filtarItem={filtarItem}
+        />
 
         {/* Timeline list */}
         <div className="max-w-7xl mx-auto -space-y- py-10">
