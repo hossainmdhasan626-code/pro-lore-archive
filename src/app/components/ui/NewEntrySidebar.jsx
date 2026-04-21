@@ -1,7 +1,6 @@
 // This component works was add new data
 
 import Link from "next/link";
-import React from "react";
 
 const NewEntrySidebar = () => {
   return (

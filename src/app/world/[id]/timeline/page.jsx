@@ -1,15 +1,15 @@
 // It's a dynamic page for timelines in tha application .
 
-import { worldsData } from "@/app/data/WorldsData";
 import TimelineEvent from "@/app/components/ui/TimelineEvent";
 import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
+import { getWorldData } from "@/app/utils/dataQuery";
 
 const page = async ({ params }) => {
   // Extract the id form params
   const { id } = await params;
 
   // Extract the worldData
-  const worldData = worldsData?.find((itme) => itme?.id === id);
+  const worldData = getWorldData(id);
 
   // Extract the timeline_data
   const data = worldData?.timeline;

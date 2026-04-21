@@ -1,14 +1,16 @@
-//
-
 "use client";
 
-import { useContext } from "react";
 import Link from "next/link";
-import { NavigationContext } from "@/app/context/creatContext/NavigationContext";
 import EmptyState from "../EmptyState";
+import useNavigationContext from "@/app/hooks/context/useNavigationContext";
+import { usePathname } from "next/navigation";
 
-const SidebarNavigation = ({ label }) => {
-  const { path } = useContext(NavigationContext);
+const SidebarNavigation = ({ label, activePath }) => {
+  // Extract current world by id .
+  const { path } = useNavigationContext();
+
+  // Extract current path
+  const pathName = usePathname();
 
   const navPath = {
     Overview: "/",
@@ -21,19 +23,23 @@ const SidebarNavigation = ({ label }) => {
     return <EmptyState type="no-world" />;
   }
 
+  let isActive = false;
+
+  if (activePath === "/") {
+    isActive = pathName === "/";
+  } else {
+    isActive = pathName.includes(activePath);
+  }
+
   return (
     <Link
       href={navPath[label] || "#"}
-      className="
-          group flex items-center justify-between
-          px-5 py-3 
-          font-crimson tracking-[0.12em] text-text-body-secondary 
-          hover:text-text-heading-primary
-          hover:bg-interactive-hover-bg
-          hover:border-nav-hover-border
-          border border-transparent rounded-sm 
-          transition-all duration-500 ease-in-out
-      "
+      className={`group flex items-center justify-between px-5 py-3 font-crimson tracking-[0.12em] transition-all duration-400 ease-in-out rounded-sm border
+    ${
+      isActive
+        ? "text-text-heading-primary bg-interactive-hover-bg border-nav-hover-border"
+        : "text-text-body-secondary border-transparent hover:text-text-heading-primary hover:bg-interactive-hover-bg hover:border-nav-hover-border"
+    }`}
     >
       {label}
     </Link>

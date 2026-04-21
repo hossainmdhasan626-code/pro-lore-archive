@@ -2,7 +2,7 @@
 
 import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
 import HeaderSearchFiltaring from "@/app/components/ui/reusable-component/HeaderSearchFiltaring";
-import { worldsData } from "@/app/data/WorldsData";
+import { getWorldData } from "@/app/utils/dataQuery";
 import Link from "next/link";
 
 const page = async ({ params }) => {
@@ -10,7 +10,7 @@ const page = async ({ params }) => {
   const { id } = await params;
 
   //  Now extract character details . By useing id which was come by params .
-  const data = worldsData?.find((item) => item?.id === id);
+  const data = getWorldData(id);
 
   const filtarArrow = [
     { id: 1, value: "all", label: "All" },

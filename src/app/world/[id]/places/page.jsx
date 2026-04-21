@@ -2,14 +2,14 @@
 
 import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
 import HeaderSearchFiltaring from "@/app/components/ui/reusable-component/HeaderSearchFiltaring";
-import { worldsData } from "@/app/data/WorldsData";
+import { getWorldData } from "@/app/utils/dataQuery";
 
 const page = async ({ params }) => {
   // Extract world id and place id form params .
   const { id } = await params;
 
   // Extract the world data using id
-  const worldData = worldsData?.find((item) => item?.id === id);
+  const worldData = getWorldData(id);
 
   // Extract the places arrow form worldData
   const places = worldData?.places;

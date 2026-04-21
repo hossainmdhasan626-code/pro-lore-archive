@@ -1,6 +1,7 @@
 // This page was the hero section of the overview page .
 
 import { worldsData } from "@/app/data/WorldsData";
+import { getTotalCharacter } from "@/app/utils/getTotalCharacter";
 
 const HeroSectionOverview = () => {
   // Data collect form main data .
@@ -23,9 +24,7 @@ const HeroSectionOverview = () => {
   // };
 
   // Extract total characters
-  const totalCha = worldData?.reduce((acc, world) => {
-    return acc + (world?.characters?.length || 0);
-  }, 0);
+  const totalCha = getTotalCharacter(worldData);
 
   // Custom arrow for count section
   const data = [

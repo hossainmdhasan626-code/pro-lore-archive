@@ -1,6 +1,3 @@
-// src/app/components/ui/TimelineEvent.jsx
-import React from "react";
-
 const TimelineEvent = ({ year, tag, title, description, isLast = false }) => {
   const tagColorClass =
     tag === "ARCANE"

@@ -26,7 +26,13 @@ const Navigation = () => {
         <div className="flex flex-col gap-1">
           {/* Do a map() on navItems */}
           {navItems?.map((item) => {
-            return <SidebarNavigation key={item?.id} label={item?.label} />;
+            return (
+              <SidebarNavigation
+                key={item?.id}
+                label={item?.label}
+                activePath={item?.path}
+              />
+            );
           })}
         </div>
       </SelectWorld>

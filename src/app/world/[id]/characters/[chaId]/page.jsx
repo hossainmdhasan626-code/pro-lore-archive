@@ -1,17 +1,17 @@
 // Thise page work was rendar the full description of a charecter .
 
 import EmptyState from "@/app/components/ui/EmptyState";
-import { worldsData } from "@/app/data/WorldsData";
+import { getCharecterData, getWorldData } from "@/app/utils/dataQuery";
 
 const page = async ({ params }) => {
   // Extract id
   const { id, chaId } = await params;
 
   // Extract world data first
-  const worldData = worldsData?.find((item) => item?.id === id);
+  const worldData = getWorldData(id);
 
   // Now extract this particular charecter details/data
-  const data = worldData?.characters.find((item) => item?.id === chaId);
+  const data = getCharecterData(id, chaId);
 
   // Create a custom arrow for Charecter details table
   const chaDetailsTable = [
@@ -37,14 +37,8 @@ const page = async ({ params }) => {
     },
   ];
 
-  console.log("charecter id :", chaId);
-  console.log("wrold id :", id);
-
   // If the charecter was not found
-  if (!data)
-    return (
-     <EmptyState type="no-character"/>
-    );
+  if (!data) return <EmptyState type="no-character" />;
 
   return (
     <div>
@@ -201,7 +195,7 @@ const page = async ({ params }) => {
         {/* Character description on  text */}
         <div
           className="w-4/5"
-          dangerouslySetInnerHTML={{ __html: data?.fullDesc || ""}}
+          dangerouslySetInnerHTML={{ __html: data?.fullDesc || "" }}
         />
 
         {/* Character relation and appears in other character and world list 

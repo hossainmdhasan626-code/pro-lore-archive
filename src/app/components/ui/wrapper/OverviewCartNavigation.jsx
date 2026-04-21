@@ -1,11 +1,10 @@
 "use client";
 
-import { NavigationContext } from "@/app/context/creatContext/NavigationContext";
+import useNavigationContext from "@/app/hooks/context/useNavigationContext";
 import Link from "next/link";
-import { useContext } from "react";
 
 const OverviewCartNavigation = ({ children, topBorderColor, id }) => {
-  const { worldSelected } = useContext(NavigationContext);
+  const { worldSelected } = useNavigationContext();
 
   return (
     <Link

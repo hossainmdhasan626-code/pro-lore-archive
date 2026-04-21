@@ -1,9 +1,8 @@
 // This component was the header of the sidebar
 
 import Link from "next/link";
-import React from "react";
 
-const Sidebar_Header = () => {
+const SidebarHeader = () => {
   return (
     <div
       className="w-full
@@ -21,4 +20,4 @@ const Sidebar_Header = () => {
   );
 };
 
-export default Sidebar_Header;
+export default SidebarHeader;

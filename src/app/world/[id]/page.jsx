@@ -1,7 +1,7 @@
 // It's was a daynamic page for world overview .
 
 import DataGuard from "@/app/components/ui/reusable-component/DataGuard";
-import { worldsData } from "@/app/data/WorldsData";
+import { getWorldData } from "@/app/utils/dataQuery";
 import Link from "next/link";
 
 const page = async ({ params }) => {
@@ -9,7 +9,7 @@ const page = async ({ params }) => {
   const { id } = await params;
 
   // Fine this particular world data by useing id .
-  const data = worldsData.find((item) => item?.id === id);
+  const data = getWorldData(id);
 
   // Create a custom arrow with the data for world section
   const worldDetails = [
