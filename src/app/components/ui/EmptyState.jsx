@@ -1,9 +1,11 @@
-"use client";
-import { Cinzel, Crimson_Pro } from "next/font/google";
+// If no characters, timelines, or heroes have been recorded in this world thane
+// thaen this component was run .
+
 import Link from "next/link";
 
 const EmptyState = ({ type = "no-data" }) => {
-  // টাইপ অনুযায়ী মেসেজ সেট করা
+  // Depends on the type data content variable will decide wich type of data will be
+  // rendar .
   const content = {
     "no-world": {
       title: "No World Selected",
@@ -17,6 +19,12 @@ const EmptyState = ({ type = "no-data" }) => {
         "No characters, timelines, or heroes have been recorded in this world so far.",
       action: "Data Not Found",
     },
+    "no-character": {
+      title: "Character Not Found",
+      description:
+        "The legend of this character has not been written yet, or it may have been lost to time.",
+      action: "Return to Archive",
+    },
   };
 
   const { title, description, action } = content[type] || content["no-data"];
@@ -29,38 +37,17 @@ const EmptyState = ({ type = "no-data" }) => {
     text-center"
     >
       {/* A decorative icon or symbol (according to your theme) */}
-      <div
-        className="mb-6 
-      rotate-45 
-      w-20 h-20 
-      border-2 border-gold-border-dim rounded-full 
-      flex items-center justify-center 
-      bg-card-sidebar-bg 
-      group-hover:rotate-0 
-      transition-transform duration-500"
-      >
-        <div
-          className="w-12 h-12 
-        border border-gold-accent-primary 
-        opacity-50"
-        ></div>
+      <div className="mb-6 rotate-45 w-20 h-20 border-2 border-gold-border-dim rounded-full flex items-center justify-center bg-card-sidebar-bg group-hover:rotate-0 transition-transform duration-500">
+        <div className="w-12 h-12 border border-gold-accent-primary opacity-50"></div>
       </div>
 
       {/* Title - Cinzel Font */}
-      <h2
-        className="mb-4
-      font-cinzel text-2xl md:text-3xl text-text-heading-primary tracking-wider"
-      >
+      <h2 className="mb-4 font-cinzel text-2xl md:text-3xl text-text-heading-primary tracking-wider">
         {title}
       </h2>
 
       {/* Description - Crimson Pro */}
-      <p
-        className="font-crimson text-text-body-secondary text-lg italic
-      mb-8
-      max-w-md 
-      leading-relaxed "
-      >
+      <p className="font-crimson text-text-body-secondary text-lg italic mb-8 max-w-md  leading-relaxed ">
         {description}
       </p>
 

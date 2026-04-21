@@ -1,9 +1,8 @@
 // This Sedebar component was the main sidebar for hole application
 
-import React from "react";
-import Sidebar_Header from "../ui/Sidebar_Header";
 import Navigation from "../ui/Navigation";
-import New_entry_sidebar from "../ui/New_entry_sidebar";
+import NewEntrySidebar from "../ui/NewEntrySidebar";
+import SidebarHeader from "../ui/SidebarHeader";
 
 const Sidebar = () => {
   return (
@@ -16,7 +15,7 @@ const Sidebar = () => {
       {/* Top Section */}
       <div>
         {/* Sidebar Header */}
-        <Sidebar_Header />
+        <SidebarHeader />
 
         {/* Navigation */}
         <Navigation />
@@ -25,7 +24,7 @@ const Sidebar = () => {
       {/* Bottom Section */}
       <div>
         {/* New entry */}
-        <New_entry_sidebar />
+        <NewEntrySidebar />
       </div>
     </div>
   );

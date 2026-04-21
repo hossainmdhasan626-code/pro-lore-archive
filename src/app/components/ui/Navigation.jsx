@@ -1,8 +1,8 @@
 // This component was the header navigation section
 
-import { NAV_ITEMS } from "@/app/data/Navigation_data";
-import Sidebar_navigation from "./wrapper/Sidebar_navigation";
-import Select_world from "./wrapper/Select_world";
+import SelectWorld from "./wrapper/SelectWorld";
+import { navItems } from "@/app/data/NavigationData";
+import SidebarNavigation from "./wrapper/SidebarNavigation";
 
 const Navigation = () => {
   return (
@@ -19,15 +19,23 @@ const Navigation = () => {
         NAVIGATE
       </p>
 
-      <Select_world>
+      {/* If no world is selected, the EmptySetate component will be rendered.
+       */}
+      <SelectWorld>
         {/* A div rapper for rendar the navigation */}
         <div className="flex flex-col gap-1">
-          {/* Do a map() on NAV_ITEMS */}
-          {NAV_ITEMS?.map((item) => {
-            return <Sidebar_navigation key={item?.id} label={item?.label} />;
+          {/* Do a map() on navItems */}
+          {navItems?.map((item) => {
+            return (
+              <SidebarNavigation
+                key={item?.id}
+                label={item?.label}
+                activePath={item?.path}
+              />
+            );
           })}
         </div>
-      </Select_world>
+      </SelectWorld>
     </div>
   );
 };
