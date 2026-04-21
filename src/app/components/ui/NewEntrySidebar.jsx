@@ -18,7 +18,7 @@ const NewEntrySidebar = () => {
         border border-gold-border-dim hover:border-gold-accent-primary rounded-[3px]
         transition-all duration-300 cursor-pointer uppercase tracking-widest"
       >
-        <Link href={"#"} className="flex gap-2 justify-center items-center">
+        <Link href={"/newEntry"} className="flex gap-2 justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

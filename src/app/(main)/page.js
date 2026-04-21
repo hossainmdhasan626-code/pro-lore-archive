@@ -1,4 +1,4 @@
-import Overview from "./components/shared/Overview";
+import Overview from "../components/shared/Overview";
 
 export default function Home() {
   return (

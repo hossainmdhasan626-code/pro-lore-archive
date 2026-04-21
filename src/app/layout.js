@@ -1,7 +1,5 @@
-import Sidebar from "./components/shared/Sidebar";
 import { Cinzel, Crimson_Pro, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import NavigationContextProvider from "./context/context-provider/NavigationContextProvider";
 
 // The use case of this font was "display heading, title, name ,logo, numbers"
 const cinzel = Cinzel({
@@ -33,25 +31,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${cinzel.variable} ${crimson.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="bg-main-app-bg">
-        {/* Wrap the holl application with NavigationContextProvider */}
-        <NavigationContextProvider>
-          {/* Create a div rapper for sidebar and main containt */}
-          <div className="flex min-h-screen w-full">
-            {/* A div rapper for take the % of width for sidebar */}
-            <div className="w-[13%] bg-card-sidebar-bg">
-              {/* The sidebar component */}
-              <Sidebar />
-            </div>
-
-            {/* A div rapper for take the % of width for maiin containt */}
-            <div className="w-[87%]">
-              {/* The main containt */}
-              {children}
-            </div>
-          </div>
-        </NavigationContextProvider>
-      </body>
+      <body className="bg-main-app-bg">{children}</body>
     </html>
   );
 }
